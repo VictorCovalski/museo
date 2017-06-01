@@ -11,12 +11,9 @@ package controle;
  */
 public class Diretor extends Tecnico{
     
-    private int codigoDiretor;
-    
-    public Diretor(String nome, String cpf, String endereco, String dataNascimento,String usuario,String senha,int codigoDiretor)
+    public Diretor(String nome, String cpf, String endereco, String dataNascimento,String senha)
     {
-        super(nome, cpf, endereco, dataNascimento,usuario,senha);
-        this.codigoDiretor = codigoDiretor;
+        super(nome, cpf, endereco, dataNascimento,senha);
     }
     
 }

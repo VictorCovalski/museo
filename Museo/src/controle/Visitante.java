@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author tech
  */
-public class Visitante implements Usuario{
+public class Visitante extends Usuario{
     
     public Visitante()
     {
-        
+        this.nome = "visitante";
     }
     @Override
     public ArrayList<Obra> buscaObra(String titulo)

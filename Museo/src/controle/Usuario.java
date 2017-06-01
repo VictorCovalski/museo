@@ -11,7 +11,52 @@ import java.util.ArrayList;
  *
  * @author tech
  */
-public interface Usuario {
-        public ArrayList<Obra> buscaObra(String titulo);
-        
+public abstract class Usuario {
+    protected String nome;
+    protected String cpf;
+    protected String endereco;
+    protected String dataNascimento;
+    protected String senha;
+    
+     public abstract ArrayList<Obra> buscaObra(String titulo);
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }

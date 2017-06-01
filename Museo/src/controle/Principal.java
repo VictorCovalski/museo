@@ -17,11 +17,14 @@ public class Principal {
     /**
      * @param args the command line arguments
      */
+    public static ArrayList<Usuario> usuariosCadastrados;
+    public static Usuario usuarioAutenticado;
     public static void main(String[] args) {
-        ArrayList<Usuario> usuariosCadastrados;
+        
         usuariosCadastrados = new ArrayList();
-        Usuario pesqTeste = new Pesquisador("victor","11122233312","rua sem nome,22","01/01/1991","victor","123");
-        Usuario dirTeste = new Diretor("janine","12112112112","rua sem nome,22","02/01/1991","janine","321",1);
+        usuarioAutenticado = new Visitante();
+        Usuario pesqTeste = new Pesquisador("victor","01869935012","rua sem nome,22","01/01/1991","123");
+        Usuario dirTeste = new Diretor("janine","12345678912","rua sem nome,22","02/01/1991","321");
         usuariosCadastrados.add(pesqTeste);
         usuariosCadastrados.add(dirTeste);
         VisaoPrincipal vp = new VisaoPrincipal();

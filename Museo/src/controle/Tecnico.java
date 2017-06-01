@@ -11,18 +11,9 @@ package controle;
  */
 public class Tecnico extends Pesquisador{
     
-    private int codigoTecnico;
-    
-    public Tecnico(String nome,String cpf,String endereco,String dataNascimento, String usuario, String senha, int codigoTecnico)
+    public Tecnico(String nome,String cpf,String endereco,String dataNascimento,String senha)
     {
-        super(nome,cpf,endereco,dataNascimento,usuario,senha);
-        this.codigoTecnico = codigoTecnico;
+        super(nome,cpf,endereco,dataNascimento,senha);
     }
-    
-    public Tecnico(String nome,String cpf,String endereco,String dataNascimento,String usuario,String senha)
-    {
-        super(nome,cpf,endereco,dataNascimento,usuario,senha);
-    }
-    
     
 }

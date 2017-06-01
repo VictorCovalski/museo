@@ -12,52 +12,14 @@ package controle;
 public class Pesquisador extends Visitante{
     
     
-    public Pesquisador(String nome,String cpf,String endereco,String dataNascimento,String usuario,String senha)
+    public Pesquisador(String nome,String cpf,String endereco,String dataNascimento,String senha)
     {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
         this.dataNascimento = dataNascimento;
-        this.usuario = usuario;
         this.senha = senha;
     }
-    
-    protected String nome;
-    protected String cpf;
-    protected String endereco;
-    protected String dataNascimento; //podemos colocar um tipo para date
-    protected String usuario;
-    protected String senha;
-    
-    public String getNome() {
-        return nome;
-    }
+     
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
 }
