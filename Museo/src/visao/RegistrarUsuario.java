@@ -5,8 +5,14 @@
  */
 package visao;
 
-import controle.*;
+import javax.swing.JComboBox;
+import modelo.Tecnico;
+import modelo.Principal;
+import modelo.Pesquisador;
+import modelo.Diretor;
 import javax.swing.JOptionPane;
+import modelo.Coordenador;
+import modelo.Usuario;
 /**
  *
  * @author Gleider
@@ -31,7 +37,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBoxTipoReg = new javax.swing.JComboBox<>();
+        jComboBoxTipoReg = new javax.swing.JComboBox<>(Principal.usuarioAutenticado.getPermissaoCadastro());
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -64,7 +70,6 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Registro de usuário");
 
-        jComboBoxTipoReg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pesquisador", "Técnico", "Diretor", "Coordenador" }));
         jComboBoxTipoReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoRegActionPerformed(evt);
@@ -387,4 +392,5 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldSenha;
     // End of variables declaration//GEN-END:variables
+
 }

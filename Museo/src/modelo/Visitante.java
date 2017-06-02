@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controle;
+package modelo;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,15 @@ public class Visitante extends Usuario{
     
     public Visitante()
     {
-        this.nome = "visitante";
+        this.nome = "Visitante";
+    }
+    public Visitante(String nome,String cpf,String endereco,String dataNascimento,String senha)
+    {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.dataNascimento = dataNascimento;
+        this.senha = senha;
     }
     @Override
     public ArrayList<Obra> buscaObra(String titulo)
@@ -24,4 +32,6 @@ public class Visitante extends Usuario{
         
         return retorno;
     }
+    
+    
 }

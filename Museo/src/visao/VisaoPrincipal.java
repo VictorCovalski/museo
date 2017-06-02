@@ -5,6 +5,9 @@
  */
 package visao;
 
+import modelo.Principal;
+import modelo.Tecnico;
+
 /**
  *
  * @author Gleider
@@ -240,8 +243,13 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        RegistrarUsuario ru = new RegistrarUsuario();
-        ru.setVisible(true);
+        
+        //se o usuario autenticado não for visitante nem pesquisador, prosseguimos
+        if(Principal.usuarioAutenticado instanceof Tecnico)
+        {
+                RegistrarUsuario ru = new RegistrarUsuario();
+                ru.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

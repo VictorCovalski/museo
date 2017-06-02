@@ -5,8 +5,8 @@
  */
 package visao;
 
-import controle.Principal;
-import controle.Usuario;
+import modelo.Principal;
+import modelo.Usuario;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 /**

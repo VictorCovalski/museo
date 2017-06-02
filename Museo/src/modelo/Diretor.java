@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controle;
+package modelo;
 
 /**
  *
  * @author tech
  */
 public class Diretor extends Tecnico{
-    
+    private String permissaoCadastro[] = new String[]{"Pesquisador","Tecnico"};
     public Diretor(String nome, String cpf, String endereco, String dataNascimento,String senha)
     {
         super(nome, cpf, endereco, dataNascimento,senha);

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controle;
+package modelo;
 
 /**
  *
@@ -11,6 +11,8 @@ package controle;
  */
 public class Tecnico extends Pesquisador{
     
+    private String permissaoCadastro[] = new String[]{"Pesquisador"};
+
     public Tecnico(String nome,String cpf,String endereco,String dataNascimento,String senha)
     {
         super(nome,cpf,endereco,dataNascimento,senha);

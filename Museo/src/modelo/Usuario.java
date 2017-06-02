@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controle;
+package modelo;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,11 @@ public abstract class Usuario {
     protected String endereco;
     protected String dataNascimento;
     protected String senha;
-    
+    private String permissaoCadastro[] = new String[]{};
+
+    public String[] getPermissaoCadastro() {
+        return permissaoCadastro;
+    }
      public abstract ArrayList<Obra> buscaObra(String titulo);
 
     public String getNome() {
