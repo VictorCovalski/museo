@@ -6,22 +6,22 @@ import java.util.ArrayList;
  * @author Guilherme
  *
  */
-public class Instituicao {
+public class Museu {
 	
 	private String nome;
 	private String endereco;
-	private ArrayList<Museu> museus;
-	private ArrayList<Usuario> usuarios;
+	private ArrayList<Colecao> colecoes;
 	
-	public Instituicao()
+	public Museu()
 	{
 		
 	}
+	
 	public String getNome()
 	{
 		return nome;
 	}
-	public void setNome(String nome)
+	public void setNome(nome)
 	{
 		nome = this.nome;
 	}
