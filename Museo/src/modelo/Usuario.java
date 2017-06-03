@@ -17,8 +17,7 @@ public abstract class Usuario {
     protected String endereco;
     protected String dataNascimento;
     protected String senha;
-    private String permissaoCadastro[] = new String[]{};
-
+    protected String permissaoCadastro[];
     public String[] getPermissaoCadastro() {
         return permissaoCadastro;
     }

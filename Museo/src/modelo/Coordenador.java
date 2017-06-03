@@ -10,11 +10,10 @@ package modelo;
  * @author tech
  */
 public class Coordenador extends Diretor{
-    private String permissaoCadastro[] = new String[]{"Pesquisador","Tecnico","Diretor","Coordenador"};
-
-
+    
     public Coordenador(String nome,String cpf,String endereco,String dataNascimento,String senha) {
           super(nome,cpf,endereco,dataNascimento,senha);
+          this.permissaoCadastro = new String[]{"Pesquisador","Tecnico","Diretor","Coordenador"};
     }
    
 }

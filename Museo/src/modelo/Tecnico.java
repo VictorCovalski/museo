@@ -11,11 +11,11 @@ package modelo;
  */
 public class Tecnico extends Pesquisador{
     
-    private String permissaoCadastro[] = new String[]{"Pesquisador"};
-
+    
     public Tecnico(String nome,String cpf,String endereco,String dataNascimento,String senha)
     {
         super(nome,cpf,endereco,dataNascimento,senha);
+        this.permissaoCadastro = new String[]{"Pesquisador"};
     }
     
 }

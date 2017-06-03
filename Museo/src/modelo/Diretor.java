@@ -9,11 +9,11 @@ package modelo;
  *
  * @author tech
  */
-public class Diretor extends Tecnico{
-    private String permissaoCadastro[] = new String[]{"Pesquisador","Tecnico"};
+public class Diretor extends Tecnico{    
     public Diretor(String nome, String cpf, String endereco, String dataNascimento,String senha)
     {
         super(nome, cpf, endereco, dataNascimento,senha);
+        this.permissaoCadastro = new String[]{"Pesquisador","Tecnico"};
     }
     
 }
