@@ -26,6 +26,7 @@ public class RegistrarObra extends javax.swing.JFrame {
      RegistrarPintura rp;
      RegistrarArquitetura ra;
      RegistrarEscultura re;
+     MaskFormatter mask;
     /**
      * Creates new form RegistrarObra
      */
@@ -47,7 +48,7 @@ public class RegistrarObra extends javax.swing.JFrame {
     }
     
     private void maskData(JFormattedTextField ft){
-        MaskFormatter mask;
+        
         try {
             mask = new MaskFormatter("##/##/####");
             mask.install(ft);
@@ -73,9 +74,9 @@ public class RegistrarObra extends javax.swing.JFrame {
         jTextFieldProcedencia = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jComboBoxObrasRelacionadas = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jButtonAdicionarObra = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButtonAdicionarMaterial = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jFormattedTextDataPublic = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -84,7 +85,7 @@ public class RegistrarObra extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldMaterial = new javax.swing.JTextField();
         jTextFieldEstante = new javax.swing.JTextField();
         jTextFieldPrateleira = new javax.swing.JTextField();
         jTextFieldNumero = new javax.swing.JTextField();
@@ -93,6 +94,7 @@ public class RegistrarObra extends javax.swing.JFrame {
         jPanelEstilo = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jComboBoxMateriais = new javax.swing.JComboBox<>();
+        jButtonRemoverMaterial = new javax.swing.JButton();
         jButtonRegistrar = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
@@ -117,11 +119,16 @@ public class RegistrarObra extends javax.swing.JFrame {
 
         jComboBoxObrasRelacionadas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "vazio" }));
 
-        jButton1.setText("adicionar");
+        jButtonAdicionarObra.setText("adicionar");
 
         jLabel7.setText("Material");
 
-        jButton2.setText("adicionar");
+        jButtonAdicionarMaterial.setText("adicionar");
+        jButtonAdicionarMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarMaterialActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Data publicação");
 
@@ -184,6 +191,13 @@ public class RegistrarObra extends javax.swing.JFrame {
 
         jComboBoxMateriais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Materiais" }));
 
+        jButtonRemoverMaterial.setText("Remover");
+        jButtonRemoverMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverMaterialActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -217,7 +231,7 @@ public class RegistrarObra extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jComboBoxObrasRelacionadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton1)))
+                                        .addComponent(jButtonAdicionarObra)))
                                 .addGap(49, 49, 49)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -227,11 +241,13 @@ public class RegistrarObra extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2)
+                                        .addComponent(jButtonAdicionarMaterial)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jComboBoxMateriais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jComboBoxMateriais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonRemoverMaterial))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
@@ -282,11 +298,12 @@ public class RegistrarObra extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBoxObrasRelacionadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonAdicionarObra)
                     .addComponent(jLabel7)
-                    .addComponent(jButton2)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxMateriais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonAdicionarMaterial)
+                    .addComponent(jTextFieldMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxMateriais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRemoverMaterial))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -407,6 +424,7 @@ public class RegistrarObra extends javax.swing.JFrame {
         op = JOptionPane.showOptionDialog(null, "Deseja confirmar registro?", "Registrar", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         
         if(op == 1){
+            
             JOptionPane.showMessageDialog(null, "Registrado com sucesso");
            
       
@@ -421,6 +439,7 @@ public class RegistrarObra extends javax.swing.JFrame {
         jTextFieldPrateleira.setText("");
         jTextFieldProcedencia.setText("");
         jTextFieldTitulo.setText("");
+       
         
         if(jComboBoxEstilo.getSelectedItem().toString().equals("Pintura")){
             rp.apagar();
@@ -431,7 +450,24 @@ public class RegistrarObra extends javax.swing.JFrame {
         if(jComboBoxEstilo.getSelectedItem().toString().equals("Escultura")){
             re.apagar();
         }
+        jComboBoxMateriais.removeAllItems();
+        jComboBoxMateriais.addItem("Materiais");
+   
+        
+       
     }//GEN-LAST:event_jButtonLimparActionPerformed
+
+    private void jButtonAdicionarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarMaterialActionPerformed
+        if(!jTextFieldMaterial.getText().isEmpty()){
+            jComboBoxMateriais.addItem(jTextFieldMaterial.getText());
+            jTextFieldMaterial.setText("");
+        }
+    }//GEN-LAST:event_jButtonAdicionarMaterialActionPerformed
+
+    private void jButtonRemoverMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverMaterialActionPerformed
+        if(!jComboBoxMateriais.getSelectedItem().toString().equals("Materiais"))
+            jComboBoxMateriais.removeItem(jComboBoxMateriais.getSelectedItem());
+    }//GEN-LAST:event_jButtonRemoverMaterialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -469,10 +505,11 @@ public class RegistrarObra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAdicionarMaterial;
+    private javax.swing.JButton jButtonAdicionarObra;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonRegistrar;
+    private javax.swing.JButton jButtonRemoverMaterial;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBoxEstilo;
     private javax.swing.JComboBox<String> jComboBoxMateriais;
@@ -497,8 +534,8 @@ public class RegistrarObra extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelEstilo;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextFieldEstante;
+    private javax.swing.JTextField jTextFieldMaterial;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNumero;
     private javax.swing.JTextField jTextFieldPrateleira;
