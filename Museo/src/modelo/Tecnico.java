@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author tech
@@ -12,9 +14,9 @@ package modelo;
 public class Tecnico extends Pesquisador{
     
     
-    public Tecnico(String nome,String cpf,String endereco,String dataNascimento,String senha)
+    public Tecnico(String nome,String cpf,String endereco,String dataNascimento,String senha,ArrayList<String> museus)
     {
-        super(nome,cpf,endereco,dataNascimento,senha);
+        super(nome,cpf,endereco,dataNascimento,senha,museus);
         this.permissaoCadastro = new String[]{"Pesquisador"};
     }
     

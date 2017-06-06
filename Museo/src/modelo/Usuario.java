@@ -18,6 +18,8 @@ public abstract class Usuario {
     protected String dataNascimento;
     protected String senha;
     protected String permissaoCadastro[];
+    protected ArrayList<String> museusPermitidos;
+    
     public String[] getPermissaoCadastro() {
         return permissaoCadastro;
     }

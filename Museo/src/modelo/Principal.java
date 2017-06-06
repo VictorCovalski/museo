@@ -19,8 +19,9 @@ public class Principal {
      */
     public static ArrayList<Usuario> usuariosCadastrados;
     public static Usuario usuarioAutenticado;
-    
+    public static String listaMuseus[] = {"Museu A","Museu B","Museu C"};
     public static void main(String[] args) {
+        
         
         usuariosCadastrados = new ArrayList();
         usuarioAutenticado = new Visitante();
