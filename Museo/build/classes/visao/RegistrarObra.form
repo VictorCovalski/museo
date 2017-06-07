@@ -98,7 +98,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabelPaisOrigem" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jTextField3" min="-2" pref="147" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldPaisOrigem" min="-2" pref="147" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -182,7 +182,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelPaisOrigem" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldPaisOrigem" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldProcedencia" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -255,7 +255,7 @@
             <Property name="text" type="java.lang.String" value="Pa&#xed;s de origem"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="jTextFieldPaisOrigem">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>

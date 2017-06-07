@@ -25,6 +25,28 @@ public class Escultura extends Obra{
     private double circunferenciaMaior;
     private double circunferenciaMenor;
 
+    public Escultura(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
+            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
+            , String localPrateleira, int localNumero, String tecnica, String forma, ArrayList<String> materialUtilizado
+            , ArrayList<String> autor, double peso, double comprimento, double largura, double altura, double espessura
+            , double profundidade, double circunferenciaMaior, double circunferenciaMenor) {
+        
+        super(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao, dataAquisicao, localEstante
+                , localPrateleira, localNumero);
+        this.tecnica = tecnica;
+        this.forma = forma;
+        this.materialUtilizado = materialUtilizado;
+        this.autor = autor;
+        this.peso = peso;
+        this.comprimento = comprimento;
+        this.largura = largura;
+        this.altura = altura;
+        this.espessura = espessura;
+        this.profundidade = profundidade;
+        this.circunferenciaMaior = circunferenciaMaior;
+        this.circunferenciaMenor = circunferenciaMenor;
+    }
+
     public String getTecnica() {
         return tecnica;
     }

@@ -5,6 +5,10 @@
  */
 package visao;
 
+import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 /**
  *
  * @author gleider
@@ -28,6 +32,49 @@ public class RegistrarPintura extends javax.swing.JPanel {
         jTextFieldPeso.setText("");
         jTextFieldTecnica.setText("");
     }
+
+    public ArrayList<String> getjComboBoxAutores() {
+        ArrayList<String> autores = null;
+        for(int i=1;i<jComboBoxAutores.getHeight();i++){
+           autores.add(jComboBoxAutores.getItemAt(i));
+        }
+        return autores;
+    }
+
+    public double getjTextFieldAltura() {
+        String altura = jTextFieldAltura.getText();
+        altura = altura.replace(",", ".");
+        return Double.parseDouble(altura);
+    }
+
+
+    public double getjTextFieldComprimento() {
+        String comprimento = jTextFieldComprimento.getText();
+        comprimento = comprimento.replace(",", ".");
+        return Double.parseDouble(comprimento);
+    }
+
+    public String getjTextFieldEstado() {
+        return jTextFieldEstado.getText();
+    }
+
+    public double getjTextFieldLargura() {
+        String largura = jTextFieldLargura.getText();
+        largura = largura.replace(",", ".");
+        return Double.parseDouble(largura);
+    }
+
+    public double getjTextFieldPeso() {
+        String peso = jTextFieldPeso.getText();
+        peso = peso.replace(",", ".");
+        return Double.parseDouble(peso);
+    }
+
+    public String getjTextFieldTecnica() {
+        return jTextFieldTecnica.getText();
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

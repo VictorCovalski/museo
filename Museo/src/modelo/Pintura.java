@@ -19,6 +19,22 @@ public class Pintura extends Obra{
     private double altura;
     private String estadoConservacao;
     private ArrayList<String> autor;
+
+    public Pintura(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
+            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
+            , String localPrateleira, int localNumero, String tecnica, double peso, double comprimento, double largura
+            , double altura, String estadoConservacao, ArrayList<String> autor) {
+        
+        super(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao, dataAquisicao
+                , localEstante, localPrateleira, localNumero);
+        this.tecnica = tecnica;
+        this.peso = peso;
+        this.comprimento = comprimento;
+        this.largura = largura;
+        this.altura = altura;
+        this.estadoConservacao = estadoConservacao;
+        this.autor = autor;
+    }
    
     public String getTecnica() {
         return tecnica;

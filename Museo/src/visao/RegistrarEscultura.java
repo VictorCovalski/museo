@@ -5,6 +5,10 @@
  */
 package visao;
 
+import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 /**
  *
  * @author gleider
@@ -32,6 +36,79 @@ public class RegistrarEscultura extends javax.swing.JPanel {
         jTextFieldProfundidade.setText("");
         jTextFieldTecnica.setText("");
     }
+
+    public ArrayList<String> getjComboBoxAutores() {
+        ArrayList<String> autores = null;
+        for(int i=1;i<jComboBoxAutores.getHeight();i++){
+            autores.add(jComboBoxAutores.getItemAt(i));
+        }
+        return autores;
+    }
+
+    public ArrayList<String> getjComboBoxMateriais() {
+        ArrayList<String> materiais = null;
+        for(int i=1;i<jComboBoxMateriais.getHeight();i++){
+            materiais.add(jComboBoxMateriais.getItemAt(i));
+        }
+        return materiais;
+    }
+
+    public double getjTextFieldAltura() {
+        String altura = jTextFieldAltura.getText();
+        altura = altura.replace(",", ".");
+        return Double.parseDouble(altura);
+    }
+
+    public double getjTextFieldComprimento() {
+        String comprimento = jTextFieldComprimento.getText();
+        comprimento = comprimento.replace(",", ".");
+        return Double.parseDouble(comprimento);
+    }
+
+    public double getjTextFieldEspessura() {
+        String espessura = jTextFieldEspessura.getText();
+        espessura = espessura.replace(",", ".");
+        return Double.parseDouble(espessura);
+    }
+
+    public String getjTextFieldForma() {
+        return jTextFieldForma.getText();
+    }
+
+    public double getjTextFieldLargura() {
+        String largura = jTextFieldLargura.getText();
+        largura = largura.replace(",", ".");
+        return Double.parseDouble(largura);
+    }
+
+    public double getjTextFieldMaiorCirc() {
+        String maiorCirc = jTextFieldMaiorCirc.getText();
+        maiorCirc = maiorCirc.replace(",", ".");
+        return Double.parseDouble(maiorCirc);
+    }
+
+    public double getjTextFieldMenorCirc() {
+        String menorCirc = jTextFieldMenorCirc.getText();
+        menorCirc = menorCirc.replace(",", ".");
+        return Double.parseDouble(menorCirc);
+    }
+
+    public double getjTextFieldPeso() {
+        String peso = jTextFieldPeso.getText();
+        peso = peso.replace(",", ".");
+        return Double.parseDouble(peso);
+    }
+
+    public double getjTextFieldProfundidade() {
+        String profundidade = jTextFieldProfundidade.getText();
+        profundidade = profundidade.replace(",", ".");
+        return Double.parseDouble(profundidade);
+    }
+
+    public String getjTextFieldTecnica() {
+        return jTextFieldTecnica.getText();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

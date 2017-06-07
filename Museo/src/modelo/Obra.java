@@ -17,7 +17,7 @@ public abstract class Obra {
     private String paisOrigem;
     private String procedencia;
     private ArrayList<String> material;
-    private ArrayList<Obra> obrasRelacionadas;
+    private ArrayList<String> obrasRelacionadas;
     private String dataPublicacao;
     private String dataAquisicao;
     private String localEstante;
@@ -25,6 +25,24 @@ public abstract class Obra {
     private int localNumero;
     //private Tecnico registradoPor;
     
+    
+    public Obra(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
+            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
+            , String localPrateleira, int localNumero){
+        
+        this.nome = nome;
+        this.titulo = titulo;
+        this.paisOrigem = paisOrigem;
+        this.procedencia = procedencia;
+        this.material = material;
+        this.obrasRelacionadas = obrasRelacionadas;
+        this.dataPublicacao = dataPublicacao;
+        this.dataAquisicao = dataAquisicao;
+        this.localEstante = localEstante;
+        this.localPrateleira = localPrateleira;
+        this.localNumero = localNumero;
+        
+    }
     
     public String getNome() {
         return nome;
@@ -66,11 +84,11 @@ public abstract class Obra {
         this.material = material;
     }
 
-    public ArrayList<Obra> getObrasRelacionadas() {
+    public ArrayList<String> getObrasRelacionadas() {
         return obrasRelacionadas;
     }
 
-    public void setObrasRelacionadas(ArrayList<Obra> obrasRelacionadas) {
+    public void setObrasRelacionadas(ArrayList<String> obrasRelacionadas) {
         this.obrasRelacionadas = obrasRelacionadas;
     }
 

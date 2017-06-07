@@ -15,6 +15,17 @@ public class Arquitetura extends Obra{
     private String estilo;
     private String linguagem;
     private ArrayList<String> nomeArtista;
+    
+    public Arquitetura(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
+            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
+            , String localPrateleira, int localNumero, String estilo, String linguagem, ArrayList<String> nomeArtista){
+        
+        super(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao, dataAquisicao
+                , localEstante, localPrateleira, localNumero);
+        this.estilo = estilo;
+        this.linguagem = linguagem;
+        this.nomeArtista = nomeArtista;
+    }
 
     public String getEstilo() {
         return estilo;

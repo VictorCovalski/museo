@@ -10,7 +10,7 @@ package visao;
  * @author Gleider
  */
 public class VisaoPrincipal extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Principal
      */

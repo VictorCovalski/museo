@@ -5,6 +5,9 @@
  */
 package visao;
 
+import java.util.ArrayList;
+import javax.swing.JTextField;
+
 /**
  *
  * @author gleider
@@ -24,6 +27,24 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
         jTextFieldLinguagem.setText("");
     }
 
+    public ArrayList<String> getjTextFieldArtista() {
+        ArrayList<String> artistas = null;
+        for(int i=1;i<jComboBoxArtistas.getHeight();i++){
+            artistas.add(jComboBoxArtistas.getItemAt(i));
+        }
+        return artistas;
+    }
+
+    public String getjTextFieldEstilo() {
+        return jTextFieldEstilo.getText();
+    }
+
+    public String getjTextFieldLinguagem() {
+        return jTextFieldLinguagem.getText();
+    }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,6 +61,7 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldArtista = new javax.swing.JTextField();
         jButtonAdicionar = new javax.swing.JButton();
+        jComboBoxArtistas = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Estilo");
 
@@ -48,6 +70,8 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
         jLabel3.setText("Artista");
 
         jButtonAdicionar.setText("Adicionar");
+
+        jComboBoxArtistas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Artistas" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -61,7 +85,9 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonAdicionar))
+                        .addComponent(jButtonAdicionar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -70,7 +96,7 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldLinguagem, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(462, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +111,8 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAdicionar))
+                    .addComponent(jButtonAdicionar)
+                    .addComponent(jComboBoxArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -93,6 +120,7 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;
+    private javax.swing.JComboBox<String> jComboBoxArtistas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

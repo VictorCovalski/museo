@@ -5,10 +5,12 @@
  */
 package visao;
 
+import controle.ControleObras;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
@@ -27,6 +29,7 @@ public class RegistrarObra extends javax.swing.JFrame {
      RegistrarArquitetura ra;
      RegistrarEscultura re;
      MaskFormatter mask;
+     ControleObras control;
     /**
      * Creates new form RegistrarObra
      */
@@ -37,7 +40,7 @@ public class RegistrarObra extends javax.swing.JFrame {
        
            jPanelEstilo.setLayout(new java.awt.CardLayout());
            card = (CardLayout)jPanelEstilo.getLayout();
-           jPanelEstilo.remove(this);
+         
     }
     
     private void showTela(Object ob){
@@ -69,7 +72,7 @@ public class RegistrarObra extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldTitulo = new javax.swing.JTextField();
         jLabelPaisOrigem = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldPaisOrigem = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldProcedencia = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -225,7 +228,7 @@ public class RegistrarObra extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabelPaisOrigem)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextFieldPaisOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(18, 18, 18)
@@ -291,7 +294,7 @@ public class RegistrarObra extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPaisOrigem)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPaisOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldProcedencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -424,6 +427,67 @@ public class RegistrarObra extends javax.swing.JFrame {
         op = JOptionPane.showOptionDialog(null, "Deseja confirmar registro?", "Registrar", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         
         if(op == 1){
+            control = new ControleObras();
+            
+            String nome = jTextFieldNome.getText();
+            String titulo = jTextFieldTitulo.getText();
+            String paisOrigem = jTextFieldPaisOrigem.getText();
+            String procedencia = jTextFieldProcedencia.getText();
+            ArrayList<String> material = null;
+            for(int i=1;i<jComboBoxMateriais.getHeight();i++){
+                material.add(jComboBoxMateriais.getItemAt(i));
+            }
+            ArrayList<String> obrasRelacionadas = null; 
+            for(int i=1;i<jComboBoxObrasRelacionadas.getHeight();i++){
+                obrasRelacionadas.add(jComboBoxObrasRelacionadas.getItemAt(i));
+            }
+            String dataPublicacao = jFormattedTextDataPublic.getText(); 
+            String dataAquisicao = jFormattedTextDataAquisi.getText(); 
+            String localEstante = jTextFieldEstante.getText();
+            String localPrateleira = jTextFieldPrateleira.getText();
+            int localNumero = Integer.parseInt(jTextFieldNumero.getText());
+            
+            if(jComboBoxEstilo.getSelectedItem().toString().equals("Pintura")){
+                ArrayList<String> autores = rp.getjComboBoxAutores();
+                double altura = rp.getjTextFieldAltura();
+                double comprimento = rp.getjTextFieldComprimento();
+                String estado = rp.getjTextFieldEstado();
+                double largura = rp.getjTextFieldLargura();
+                double peso = rp.getjTextFieldPeso();
+                String tecnica = rp.getjTextFieldTecnica();
+                
+                control.registrarPintura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao
+                        , dataAquisicao, localEstante, localPrateleira, localNumero, autores, altura, comprimento, estado
+                        , largura, peso, tecnica);
+                
+            }
+            if(jComboBoxEstilo.getSelectedItem().toString().equals("Arquitetura")){
+                ArrayList<String> artistas = ra.getjTextFieldArtista();
+                String estilo = ra.getjTextFieldEstilo();
+                String linguagem = ra.getjTextFieldLinguagem();
+                
+                control.registrarArquitetura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao
+                        , dataAquisicao, localEstante, localPrateleira, localNumero, artistas, estilo, linguagem);
+            }
+            if(jComboBoxEstilo.getSelectedItem().toString().equals("Escultura")){
+                ArrayList<String> autores = re.getjComboBoxAutores();
+                ArrayList<String> materiais = re.getjComboBoxMateriais();
+                double altura = re.getjTextFieldAltura();
+                double comprimento = re.getjTextFieldComprimento();
+                double espessura = re.getjTextFieldEspessura();
+                String forma = re.getjTextFieldForma();
+                double largura = re.getjTextFieldLargura();
+                double maiorCirc = re.getjTextFieldMaiorCirc();
+                double menorCirc = re.getjTextFieldMenorCirc();
+                double peso = re.getjTextFieldPeso();
+                double profundidade = re.getjTextFieldProfundidade();
+                String tecnica = re.getjTextFieldTecnica();
+                
+                control.registrarEscultura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao
+                        , dataAquisicao, localEstante, localPrateleira, localNumero, autores, materiais, altura, comprimento
+                        , espessura, forma, largura, maiorCirc, menorCirc, peso, profundidade, tecnica);
+            }
+            
             
             JOptionPane.showMessageDialog(null, "Registrado com sucesso");
            
@@ -533,11 +597,11 @@ public class RegistrarObra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPaisOrigem;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelEstilo;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextFieldEstante;
     private javax.swing.JTextField jTextFieldMaterial;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNumero;
+    private javax.swing.JTextField jTextFieldPaisOrigem;
     private javax.swing.JTextField jTextFieldPrateleira;
     private javax.swing.JTextField jTextFieldProcedencia;
     private javax.swing.JTextField jTextFieldTitulo;
