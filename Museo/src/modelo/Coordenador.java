@@ -5,15 +5,13 @@
  */
 package modelo;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author tech
  */
 public class Coordenador extends Diretor{
     
-    public Coordenador(String nome,String cpf,String endereco,String dataNascimento,String senha,ArrayList<String> museus) {
+    public Coordenador(String nome,String cpf,String endereco,String dataNascimento,String senha,String museus[]) {
           super(nome,cpf,endereco,dataNascimento,senha,museus);
           this.permissaoCadastro = new String[]{"Pesquisador","Tecnico","Diretor","Coordenador"};
     }

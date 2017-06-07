@@ -26,12 +26,10 @@ public class Visitante extends Usuario{
         this.senha = senha;
     }
     @Override
-    public ArrayList<Obra> buscaObra(String titulo)
-    {
-        ArrayList<Obra> retorno = new ArrayList();
-        
-        return retorno;
-    }
-    
+   public ArrayList<Obra> buscaObra(String titulo)
+   {
+       ArrayList<Obra> obras = new ArrayList<>();
+       return obras;
+   }
     
 }

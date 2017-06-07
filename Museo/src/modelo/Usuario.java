@@ -18,12 +18,16 @@ public abstract class Usuario {
     protected String dataNascimento;
     protected String senha;
     protected String permissaoCadastro[];
-    protected ArrayList<String> museusPermitidos;
+    protected String museusPermitidos[];
     
+    public String[] getMuseusPermitidos()
+    {
+        return museusPermitidos.clone();
+    }
     public String[] getPermissaoCadastro() {
         return permissaoCadastro;
     }
-     public abstract ArrayList<Obra> buscaObra(String titulo);
+    public abstract ArrayList<Obra> buscaObra(String titulo);
 
     public String getNome() {
         return nome;

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author tech
  */
 public class Diretor extends Tecnico{    
-    public Diretor(String nome, String cpf, String endereco, String dataNascimento,String senha,ArrayList<String> museus)
+    public Diretor(String nome, String cpf, String endereco, String dataNascimento,String senha,String museus[])
     {
         super(nome, cpf, endereco, dataNascimento,senha,museus);
         this.permissaoCadastro = new String[]{"Pesquisador","Tecnico"};

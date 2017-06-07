@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Tecnico extends Pesquisador{
     
     
-    public Tecnico(String nome,String cpf,String endereco,String dataNascimento,String senha,ArrayList<String> museus)
+    public Tecnico(String nome,String cpf,String endereco,String dataNascimento,String senha,String museus[])
     {
         super(nome,cpf,endereco,dataNascimento,senha,museus);
         this.permissaoCadastro = new String[]{"Pesquisador"};

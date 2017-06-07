@@ -5,6 +5,7 @@
  */
 package visao;
 
+import javax.swing.JOptionPane;
 import modelo.Principal;
 import modelo.Tecnico;
 
@@ -249,6 +250,10 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         {
                 RegistrarUsuario ru = new RegistrarUsuario();
                 ru.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Acesso restrito","Voce nao tem as permissoes necessarias para acessar esta opcao.",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
