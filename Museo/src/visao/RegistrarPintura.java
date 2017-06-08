@@ -34,7 +34,7 @@ public class RegistrarPintura extends javax.swing.JPanel {
     }
 
     public ArrayList<String> getjComboBoxAutores() {
-        ArrayList<String> autores = null;
+        ArrayList<String> autores = new ArrayList<String>();
         for(int i=1;i<jComboBoxAutores.getHeight();i++){
            autores.add(jComboBoxAutores.getItemAt(i));
         }
@@ -43,14 +43,20 @@ public class RegistrarPintura extends javax.swing.JPanel {
 
     public double getjTextFieldAltura() {
         String altura = jTextFieldAltura.getText();
-        altura = altura.replace(",", ".");
+        if(altura.contains(","))
+            altura = altura.replace(",", ".");
+        if(altura.isEmpty())
+            return 0;
         return Double.parseDouble(altura);
     }
 
 
     public double getjTextFieldComprimento() {
         String comprimento = jTextFieldComprimento.getText();
-        comprimento = comprimento.replace(",", ".");
+        if(comprimento.contains(","))
+            comprimento = comprimento.replace(",", ".");
+        if(comprimento.isEmpty())
+            return 0;
         return Double.parseDouble(comprimento);
     }
 
@@ -60,13 +66,19 @@ public class RegistrarPintura extends javax.swing.JPanel {
 
     public double getjTextFieldLargura() {
         String largura = jTextFieldLargura.getText();
-        largura = largura.replace(",", ".");
+        if(largura.contains(","))
+            largura = largura.replace(",", ".");
+        if(largura.isEmpty())
+            return 0;
         return Double.parseDouble(largura);
     }
 
     public double getjTextFieldPeso() {
         String peso = jTextFieldPeso.getText();
-        peso = peso.replace(",", ".");
+        if(peso.contains(","))
+            peso = peso.replace(",", ".");
+        if(peso.isEmpty())
+            return 0;
         return Double.parseDouble(peso);
     }
 
@@ -101,6 +113,7 @@ public class RegistrarPintura extends javax.swing.JPanel {
         jTextFieldAutor = new javax.swing.JTextField();
         jButtonAdicionar = new javax.swing.JButton();
         jComboBoxAutores = new javax.swing.JComboBox<>();
+        jButtonRemove = new javax.swing.JButton();
 
         jLabel1.setText("Tecnica");
 
@@ -123,8 +136,20 @@ public class RegistrarPintura extends javax.swing.JPanel {
         jLabel8.setText("Autor");
 
         jButtonAdicionar.setText("Adicionar");
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarActionPerformed(evt);
+            }
+        });
 
         jComboBoxAutores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Autores" }));
+
+        jButtonRemove.setText("Remove");
+        jButtonRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -172,6 +197,8 @@ public class RegistrarPintura extends javax.swing.JPanel {
                         .addComponent(jButtonAdicionar)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBoxAutores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRemove)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -200,7 +227,8 @@ public class RegistrarPintura extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(jTextFieldAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAdicionar)
-                    .addComponent(jComboBoxAutores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxAutores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRemove))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -209,9 +237,21 @@ public class RegistrarPintura extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldEstadoActionPerformed
 
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+        jComboBoxAutores.addItem(jTextFieldAutor.getText());
+        jTextFieldAutor.setText("");
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
+
+    private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
+        if(!jComboBoxAutores.getSelectedItem().equals("Autores")){
+            jComboBoxAutores.removeItem(jComboBoxAutores.getSelectedItem());
+        }
+    }//GEN-LAST:event_jButtonRemoveActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;
+    private javax.swing.JButton jButtonRemove;
     private javax.swing.JComboBox<String> jComboBoxAutores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -18,10 +18,15 @@ import visao.RegistrarObra;
  */
 public class ControleObras {
     ArrayList<Obra> obras;
+    
+    public ControleObras(){
+        obras = new ArrayList<Obra>();
+    }
     public void registrarPintura(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
             , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
             , String localPrateleira, int localNumero, ArrayList<String> autores, double altura
             , double comprimento, String estado, double largura, double peso, String tecnica){
+     
         
         obras.add(new Pintura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao, dataAquisicao
                 , localEstante, localPrateleira, localNumero, tecnica, peso, comprimento, largura, altura, estado, autores));

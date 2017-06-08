@@ -40,7 +40,7 @@ public class RegistrarObra extends javax.swing.JFrame {
        
            jPanelEstilo.setLayout(new java.awt.CardLayout());
            card = (CardLayout)jPanelEstilo.getLayout();
-         
+           control = new ControleObras();
     }
     
     private void showTela(Object ob){
@@ -58,6 +58,30 @@ public class RegistrarObra extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(RegistrarObra.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }
+    
+    private void limpar(){
+        jTextFieldNome.setText("");
+        jTextFieldEstante.setText("");
+        jTextFieldNumero.setText("");
+        jTextFieldPrateleira.setText("");
+        jTextFieldProcedencia.setText("");
+        jTextFieldTitulo.setText("");
+       
+        if(jComboBoxEstilo.getSelectedItem().toString().equals("Pintura")){
+            rp.apagar();
+        }
+        if(jComboBoxEstilo.getSelectedItem().toString().equals("Arquitetura")){
+            ra.apagar();
+        }
+        if(jComboBoxEstilo.getSelectedItem().toString().equals("Escultura")){
+            re.apagar();
+        }
+        
+        jTextFieldMaterial.setText("");
+        jComboBoxMateriais.removeAllItems();
+        jComboBoxMateriais.addItem("Materiais");
         
     }
     
@@ -427,25 +451,27 @@ public class RegistrarObra extends javax.swing.JFrame {
         op = JOptionPane.showOptionDialog(null, "Deseja confirmar registro?", "Registrar", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         
         if(op == 1){
-            control = new ControleObras();
+            
             
             String nome = jTextFieldNome.getText();
             String titulo = jTextFieldTitulo.getText();
             String paisOrigem = jTextFieldPaisOrigem.getText();
             String procedencia = jTextFieldProcedencia.getText();
-            ArrayList<String> material = null;
-            for(int i=1;i<jComboBoxMateriais.getHeight();i++){
+            ArrayList<String> material = new ArrayList<String>();
+            for(int i=1;i<jComboBoxMateriais.getItemCount();i++){
                 material.add(jComboBoxMateriais.getItemAt(i));
             }
-            ArrayList<String> obrasRelacionadas = null; 
-            for(int i=1;i<jComboBoxObrasRelacionadas.getHeight();i++){
+            ArrayList<String> obrasRelacionadas = new ArrayList<String>(); 
+            for(int i=1;i<jComboBoxObrasRelacionadas.getItemCount();i++){
                 obrasRelacionadas.add(jComboBoxObrasRelacionadas.getItemAt(i));
             }
             String dataPublicacao = jFormattedTextDataPublic.getText(); 
             String dataAquisicao = jFormattedTextDataAquisi.getText(); 
             String localEstante = jTextFieldEstante.getText();
             String localPrateleira = jTextFieldPrateleira.getText();
-            int localNumero = Integer.parseInt(jTextFieldNumero.getText());
+            int localNumero=0;
+            if(!jTextFieldNumero.getText().isEmpty())
+                localNumero = Integer.parseInt(jTextFieldNumero.getText());
             
             if(jComboBoxEstilo.getSelectedItem().toString().equals("Pintura")){
                 ArrayList<String> autores = rp.getjComboBoxAutores();
@@ -490,34 +516,14 @@ public class RegistrarObra extends javax.swing.JFrame {
             
             
             JOptionPane.showMessageDialog(null, "Registrado com sucesso");
-           
+            limpar();
       
         }
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
         
-        jTextFieldNome.setText("");
-        jTextFieldEstante.setText("");
-        jTextFieldNumero.setText("");
-        jTextFieldPrateleira.setText("");
-        jTextFieldProcedencia.setText("");
-        jTextFieldTitulo.setText("");
-       
-        
-        if(jComboBoxEstilo.getSelectedItem().toString().equals("Pintura")){
-            rp.apagar();
-        }
-        if(jComboBoxEstilo.getSelectedItem().toString().equals("Arquitetura")){
-            ra.apagar();
-        }
-        if(jComboBoxEstilo.getSelectedItem().toString().equals("Escultura")){
-            re.apagar();
-        }
-        jComboBoxMateriais.removeAllItems();
-        jComboBoxMateriais.addItem("Materiais");
-   
-        
+        limpar();  
        
     }//GEN-LAST:event_jButtonLimparActionPerformed
 

@@ -28,7 +28,7 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
     }
 
     public ArrayList<String> getjTextFieldArtista() {
-        ArrayList<String> artistas = null;
+        ArrayList<String> artistas = new ArrayList<String>();
         for(int i=1;i<jComboBoxArtistas.getHeight();i++){
             artistas.add(jComboBoxArtistas.getItemAt(i));
         }
@@ -62,6 +62,7 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
         jTextFieldArtista = new javax.swing.JTextField();
         jButtonAdicionar = new javax.swing.JButton();
         jComboBoxArtistas = new javax.swing.JComboBox<>();
+        jButtonRemover = new javax.swing.JButton();
 
         jLabel1.setText("Estilo");
 
@@ -70,8 +71,20 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
         jLabel3.setText("Artista");
 
         jButtonAdicionar.setText("Adicionar");
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarActionPerformed(evt);
+            }
+        });
 
         jComboBoxArtistas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Artistas" }));
+
+        jButtonRemover.setText("Remover");
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -87,7 +100,9 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonAdicionar)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRemover))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -96,7 +111,7 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldLinguagem, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addContainerGap(281, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,14 +127,27 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAdicionar)
-                    .addComponent(jComboBoxArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRemover))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+        jComboBoxArtistas.addItem(jTextFieldArtista.getText());
+        jTextFieldArtista.setText("");
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
+
+    private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
+        if(!jComboBoxArtistas.getSelectedItem().equals("Artistas")){
+            jComboBoxArtistas.removeItem(jComboBoxArtistas.getSelectedItem());
+        }
+    }//GEN-LAST:event_jButtonRemoverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;
+    private javax.swing.JButton jButtonRemover;
     private javax.swing.JComboBox<String> jComboBoxArtistas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
