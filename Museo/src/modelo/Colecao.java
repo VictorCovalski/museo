@@ -17,11 +17,11 @@ public class Colecao {
 		
 	}
 	
-	public String setNome(nome)
+	public void setNome(String nome)
 	{
 		nome = this.nome;
 	}
-	public void getNome()
+	public String getNome()
 	{
 		return nome;
 	}

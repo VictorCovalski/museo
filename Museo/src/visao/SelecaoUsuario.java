@@ -107,7 +107,7 @@ public class SelecaoUsuario extends javax.swing.JFrame {
             if(user.getCpf().equals(inputCpf) && user.getSenha().equals(inputPassword)) //se usuario e senha batem, autentica
             {
                 Principal.usuarioAutenticado = user;
-                VisaoPrincipal.jTextField1.setText(user.getNome()); //atualiza nome no menu principal
+                //VisaoPrincipal.jTextField1.setText(user.getNome()); //atualiza nome no menu principal
                 this.dispose(); //fecha janela
                 return;
             }

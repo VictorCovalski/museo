@@ -21,7 +21,7 @@ public class Museu {
 	{
 		return nome;
 	}
-	public void setNome(nome)
+	public void setNome(String nome)
 	{
 		nome = this.nome;
 	}
@@ -29,7 +29,7 @@ public class Museu {
 	{
 		return endereco;
 	}
-	public void setEndereco(endereco)
+	public void setEndereco(String endereco)
 	{
 		endereco = this.endereco;
 	}

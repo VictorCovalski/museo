@@ -42,7 +42,7 @@ public class Principal {
         usuarioAutenticado = new Visitante();
         String museus[] = {"Museus A", "Museu B"}; 
         Usuario pesqTeste = new Coordenador("victor","0","rua sem nome,22","01/01/1991","0",museus);
-        Usuario dirTeste = new Diretor("janine","12345678912","rua sem nome,22","02/01/1991","321",museus);
+        Usuario dirTeste = new Diretor("janine","1","rua sem nome,22","02/01/1991","1",museus);
         usuariosCadastrados.add(pesqTeste);
         usuariosCadastrados.add(dirTeste);
         VisaoPrincipal vp = new VisaoPrincipal();

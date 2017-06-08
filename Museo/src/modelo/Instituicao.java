@@ -29,7 +29,7 @@ public class Instituicao {
 	{
 		return endereco;
 	}
-	public void setEndereco(endereco)
+	public void setEndereco(String endereco)
 	{
 		endereco = this.endereco;
 	}
