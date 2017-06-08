@@ -14,7 +14,7 @@ import modelo.Tecnico;
  * @author Gleider
  */
 public class VisaoPrincipal extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Principal
      */
@@ -47,8 +47,8 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItemUsuario = new javax.swing.JMenuItem();
+        jMenuItemObra = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
@@ -179,16 +179,21 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
         jMenu7.setText("Registrar");
 
-        jMenuItem7.setText("Usuário");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemUsuario.setText("Usuário");
+        jMenuItemUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                jMenuItemUsuarioActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem7);
+        jMenu7.add(jMenuItemUsuario);
 
-        jMenuItem8.setText("Obra");
-        jMenu7.add(jMenuItem8);
+        jMenuItemObra.setText("Obra");
+        jMenuItemObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemObraActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItemObra);
 
         jMenuItem9.setText("Museu");
         jMenu7.add(jMenuItem9);
@@ -261,9 +266,10 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void jMenuItemObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemObraActionPerformed
+        RegistrarObra ro = new RegistrarObra();
+        ro.setVisible(true);
+    }//GEN-LAST:event_jMenuItemObraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,9 +328,9 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItemObra;
+    private javax.swing.JMenuItem jMenuItemUsuario;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
