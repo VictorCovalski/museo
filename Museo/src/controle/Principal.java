@@ -64,7 +64,9 @@ public class Principal {
         }
         return instancia;
     }
-    
+    public void registraMuseu(String nome, String data, String endereco, String cidade, String estado, String fun1, String fun2, String site, String telefone, String descricao){
+        museusCadastrados.add(new Museu(nome, data, endereco, cidade, estado, fun1, fun2, site, telefone, descricao));
+    }
     public void registraPesquisador(String nome,String cpf,String endereco,String dataNascimento,String senha,String museusSelecionados[])
     {
         usuariosCadastrados.add(new Pesquisador(nome,cpf,endereco,dataNascimento,senha,museusSelecionados));

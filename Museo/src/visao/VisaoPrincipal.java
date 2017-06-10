@@ -200,6 +200,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jMenu7.add(jMenuItemRegObra);
 
         jMenuItemRegMuseu.setText("Museu");
+        jMenuItemRegMuseu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRegMuseuActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItemRegMuseu);
 
         jMenuItemRegColecao.setText("Coleção");
@@ -313,6 +318,16 @@ public class VisaoPrincipal extends javax.swing.JFrame {
           jButtonLogout.setEnabled(false);
         }
     }//GEN-LAST:event_jButtonLogoutActionPerformed
+
+    private void jMenuItemRegMuseuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegMuseuActionPerformed
+        if(control.checaPermissaoCoordenador())
+        {
+            RegistrarMuseu rm = new RegistrarMuseu();
+            rm.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Área Restrita", "Usuário não autorizado", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemRegMuseuActionPerformed
 
     /**
      * @param args the command line arguments
