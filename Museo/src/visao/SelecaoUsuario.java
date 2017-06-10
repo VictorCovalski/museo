@@ -5,11 +5,8 @@
  */
 package visao;
 
-import modelo.Principal;
-import modelo.Usuario;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
+import controle.Principal;
 /**
  *
  * @author Gleider
@@ -19,8 +16,10 @@ public class SelecaoUsuario extends javax.swing.JFrame {
     /**
      * Creates new form SelecaoUsuario
      */
+    private Principal control;
     public SelecaoUsuario() {
         initComponents();
+        control = Principal.getInstance();
     }
 
     /**
@@ -102,19 +101,19 @@ public class SelecaoUsuario extends javax.swing.JFrame {
         String inputCpf = jTextFieldLogin.getText();
         String inputPassword = String.valueOf(pass);
         
-        for(Usuario user : Principal.usuariosCadastrados)
+        if(control.autenticaUsuario(inputCpf,inputPassword))
         {
-            if(user.getCpf().equals(inputCpf) && user.getSenha().equals(inputPassword)) //se usuario e senha batem, autentica
-            {
-                Principal.usuarioAutenticado = user;
-                //VisaoPrincipal.jTextField1.setText(user.getNome()); //atualiza nome no menu principal
-                this.dispose(); //fecha janela
-                return;
-            }
+            VisaoPrincipal.uiAutentica(control.getNomeUsuarioAutenticado());
+            this.dispose();
+            return;
         }
-        //Mensagem de erro de autenticação
-        JOptionPane.showMessageDialog(this,"Nome de usuario ou senha incorretos!","Erro de autenticação",JOptionPane.ERROR_MESSAGE);
-        jPasswordField1.setText(""); //limpa campo senha
+        else
+        {
+           //Mensagem de erro de autenticação
+            JOptionPane.showMessageDialog(this,"Nome de usuario ou senha incorretos!","Erro de autenticação",JOptionPane.ERROR_MESSAGE);
+            jPasswordField1.setText(""); //limpa campo senha
+        }
+    
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     /**

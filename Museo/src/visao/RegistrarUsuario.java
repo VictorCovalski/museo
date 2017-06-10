@@ -7,16 +7,11 @@ package visao;
 
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
-import modelo.Tecnico;
-import modelo.Principal;
-import modelo.Pesquisador;
-import modelo.Diretor;
-import modelo.Usuario;
+import controle.Principal;
 
 /**
  *
@@ -29,9 +24,12 @@ public class RegistrarUsuario extends javax.swing.JFrame {
      */
     
     javax.swing.DefaultListModel<String> listModel = new DefaultListModel<>();
+    Principal control;
     public RegistrarUsuario() {
+        control = Principal.getInstance();
         initComponents();
         jButtonRemover.setEnabled(false); //inicializa com o botão desativado
+        
     }
     
     public MaskFormatter Mascara(String Mascara){
@@ -96,7 +94,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Registro de usuário");
 
-        jComboBoxTipoReg.setModel(new javax.swing.DefaultComboBoxModel(Principal.usuarioAutenticado.getPermissaoCadastro()));
+        jComboBoxTipoReg.setModel(new javax.swing.DefaultComboBoxModel(control.getPermissaoCadastro()));
         jComboBoxTipoReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoRegActionPerformed(evt);
@@ -167,7 +165,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxPermissao.setModel(new javax.swing.DefaultComboBoxModel<>(Principal.usuarioAutenticado.getMuseusPermitidos()));
+        jComboBoxPermissao.setModel(new javax.swing.DefaultComboBoxModel<>(control.getMuseusUsuario()));
 
         jButtonAdicionar.setText("Adicionar");
         jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -368,7 +366,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         }
         String nome = jTextFieldNome.getText();
         String cpf = jFormattedTextFieldCPF.getText();
-        if(Principal.checaCpfCadastro(cpf))//verifica se o cpf ja consta no cadastro
+        if(control.checaCpfCadastro(cpf))//verifica se o cpf ja consta no cadastro
         {
             JOptionPane.showMessageDialog(this,"CPF ja consta em cadastro!","Erro no cadastro",JOptionPane.ERROR_MESSAGE);
             return;
@@ -385,15 +383,19 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         
         if(opt.equals("Pesquisador"))
         {
-            Principal.usuariosCadastrados.add(new Pesquisador(nome,cpf,endereco,dataNascimento,senha,museusSelecionados));
+            control.registraPesquisador(nome, cpf, endereco, dataNascimento, senha, museusSelecionados);
+        }
+        else if(opt.equals("Tecnico"))
+        {
+            control.registraTecnico(nome, cpf, endereco, dataNascimento, senha, museusSelecionados);
         }
         else if(opt.equals("Diretor"))
         {
-            Principal.usuariosCadastrados.add(new Diretor(nome,cpf,endereco,dataNascimento,senha,museusSelecionados));
+            control.registraDiretor(nome, cpf, endereco, dataNascimento, senha, museusSelecionados);
         }
-        else
+        else if(opt.equals("Coordenador"))
         {
-            Principal.usuariosCadastrados.add(new Tecnico(nome,cpf,endereco,dataNascimento,senha,museusSelecionados));
+           control.registraCoordenador(nome, cpf, endereco, dataNascimento, senha, museusSelecionados);
         }
 
         jLabelRegStatus.setText(opt + " " + jTextFieldNome.getText() + " cadastrado com sucesso.");

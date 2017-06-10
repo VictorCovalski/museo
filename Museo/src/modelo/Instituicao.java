@@ -1,5 +1,6 @@
 package modelo;
 import java.util.ArrayList;
+import controle.Principal;
 
 /**
  * 
@@ -13,10 +14,12 @@ public class Instituicao {
 	private ArrayList<Museu> museus;
 	private ArrayList<Usuario> usuarios;
 	
-	public Instituicao()
-	{
-		
-	}
+	public Instituicao(){
+            this.nome = "Universidade Federal de Pelotas";
+            this.endereco = "Av. Gomes Carneiro, 1";
+            museus = new ArrayList<>();
+            usuarios = new ArrayList<>();
+        }
 	public String getNome()
 	{
 		return nome;

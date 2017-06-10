@@ -5,7 +5,7 @@
  */
 package visao;
 
-import controle.ControleObras;
+import controle.Principal;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -29,7 +29,7 @@ public class RegistrarObra extends javax.swing.JFrame {
      RegistrarArquitetura ra;
      RegistrarEscultura re;
      MaskFormatter mask;
-     ControleObras control;
+     Principal control;
     /**
      * Creates new form RegistrarObra
      */
@@ -40,7 +40,7 @@ public class RegistrarObra extends javax.swing.JFrame {
        
            jPanelEstilo.setLayout(new java.awt.CardLayout());
            card = (CardLayout)jPanelEstilo.getLayout();
-           control = new ControleObras();
+           control = Principal.getInstance();
     }
     
     private void showTela(Object ob){

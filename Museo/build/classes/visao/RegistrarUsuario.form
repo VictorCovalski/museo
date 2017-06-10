@@ -221,7 +221,7 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxTipoReg">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(Principal.usuarioAutenticado.getPermissaoCadastro())" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(control.getPermissaoCadastro())" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -375,7 +375,7 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxPermissao">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(Principal.usuarioAutenticado.getMuseusPermitidos())" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(control.getMuseusUsuario())" type="code"/>
             </Property>
           </Properties>
           <AuxValues>

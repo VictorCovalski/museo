@@ -7,7 +7,8 @@ package visao;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-import modelo.Principal;
+import controle.Principal;
+import javax.swing.JButton;
 import modelo.Tecnico;
 
 /**
@@ -19,8 +20,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    private Principal control;
     public VisaoPrincipal() {
         initComponents();
+        control = Principal.getInstance();
+        jLabelNomeUsuario.setText(control.getNomeUsuarioAutenticado());
     }
 
     /**
@@ -43,20 +47,21 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jButtonLogin = new javax.swing.JButton();
+        jLabelNomeUsuario = new javax.swing.JLabel();
+        jButtonLogout = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
-        jMenuItemObra = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
+        jMenuItemRegObra = new javax.swing.JMenuItem();
+        jMenuItemRegMuseu = new javax.swing.JMenuItem();
+        jMenuItemRegColecao = new javax.swing.JMenuItem();
+        jMenuItemRegUsuario = new javax.swing.JMenuItem();
+        jMenuConUsuario = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItemConObra = new javax.swing.JMenuItem();
+        jMenuItemConMuseu = new javax.swing.JMenuItem();
+        jMenuItemConColecao = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         jMenu5.setText("jMenu5");
@@ -72,6 +77,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Buscar");
+        jLabel2.setEnabled(false);
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
@@ -92,17 +98,18 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
         jButton2.setText("Opções avançadas");
 
-        jButton3.setText("Autenticar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLogin.setText("Autenticar");
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonLoginActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("jTextField1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLogout.setText("Encerrar sessão");
+        jButtonLogout.setEnabled(false);
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jButtonLogoutActionPerformed(evt);
             }
         });
 
@@ -110,10 +117,6 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(26, 26, 26))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,24 +146,28 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(77, 77, 77)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2))))
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jButton3)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButtonLogin)
+                    .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonLogout)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,45 +191,45 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
         jMenu7.setText("Registrar");
 
-        jMenuItemObra.setText("Obra");
-        jMenuItemObra.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemRegObra.setText("Obra");
+        jMenuItemRegObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemObraActionPerformed(evt);
+                jMenuItemRegObraActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItemObra);
+        jMenu7.add(jMenuItemRegObra);
 
-        jMenuItem9.setText("Museu");
-        jMenu7.add(jMenuItem9);
+        jMenuItemRegMuseu.setText("Museu");
+        jMenu7.add(jMenuItemRegMuseu);
 
-        jMenuItem10.setText("Coleção");
-        jMenu7.add(jMenuItem10);
+        jMenuItemRegColecao.setText("Coleção");
+        jMenu7.add(jMenuItemRegColecao);
 
-        jMenuItem1.setText("Usuário");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemRegUsuario.setText("Usuário");
+        jMenuItemRegUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemRegUsuarioActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem1);
+        jMenu7.add(jMenuItemRegUsuario);
 
         jMenuBar1.add(jMenu7);
 
-        jMenu8.setText("Consultar");
+        jMenuConUsuario.setText("Consultar");
 
         jMenuItem11.setText("Usuário");
-        jMenu8.add(jMenuItem11);
+        jMenuConUsuario.add(jMenuItem11);
 
-        jMenuItem12.setText("Obra");
-        jMenu8.add(jMenuItem12);
+        jMenuItemConObra.setText("Obra");
+        jMenuConUsuario.add(jMenuItemConObra);
 
-        jMenuItem13.setText("Museu");
-        jMenu8.add(jMenuItem13);
+        jMenuItemConMuseu.setText("Museu");
+        jMenuConUsuario.add(jMenuItemConMuseu);
 
-        jMenuItem14.setText("Coleção");
-        jMenu8.add(jMenuItem14);
+        jMenuItemConColecao.setText("Coleção");
+        jMenuConUsuario.add(jMenuItemConColecao);
 
-        jMenuBar1.add(jMenu8);
+        jMenuBar1.add(jMenuConUsuario);
 
         jMenu6.setText("Sobre");
         jMenuBar1.add(jMenu6);
@@ -248,15 +255,14 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
        SelecaoUsuario su = new SelecaoUsuario();
        su.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
+    }//GEN-LAST:event_jButtonLoginActionPerformed
+    
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         
-        //se o usuario autenticado não for visitante nem pesquisador, prosseguimos
-        if(Principal.usuarioAutenticado instanceof Tecnico)
+        if(control.checaPermissaoTecnico())
         {
                 RegistrarUsuario ru = new RegistrarUsuario();
                 ru.setVisible(true);
@@ -271,17 +277,25 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jMenuItemObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemObraActionPerformed
-        RegistrarObra ro = new RegistrarObra();
-        ro.setVisible(true);
-    }//GEN-LAST:event_jMenuItemObraActionPerformed
+    public static void uiAutentica(String nome)
+    {
+        jLabelNomeUsuario.setText(nome);
+        jButtonLogout.setEnabled(true);
+    }
+    private void jMenuItemRegObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegObraActionPerformed
+        if(control.checaPermissaoTecnico()) //RESTRINGIR SOMENTE A TECNICOS NO FUTURO!!
+        {
+            RegistrarObra ro = new RegistrarObra();
+            ro.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Acesso restrito","Voce nao tem as permissoes necessarias para acessar esta opcao.",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemRegObraActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if(Principal.usuarioAutenticado instanceof Tecnico)
+    private void jMenuItemRegUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegUsuarioActionPerformed
+        if(control.checaPermissaoTecnico())
         {
             RegistrarUsuario ru = new RegistrarUsuario();
             ru.setVisible(true);
@@ -290,7 +304,15 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Area restrita","Usuário sem permissão de cadastro",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemRegUsuarioActionPerformed
+
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja finalizar sua sessão?", "", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
+          control.autenticaVisitante();
+          jButtonLogout.setEnabled(false);
+        }
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,29 +353,30 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonLogin;
+    private static javax.swing.JButton jButtonLogout;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private static javax.swing.JLabel jLabelNomeUsuario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenu jMenuConUsuario;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JMenuItem jMenuItemObra;
+    private javax.swing.JMenuItem jMenuItemConColecao;
+    private javax.swing.JMenuItem jMenuItemConMuseu;
+    private javax.swing.JMenuItem jMenuItemConObra;
+    private javax.swing.JMenuItem jMenuItemRegColecao;
+    private javax.swing.JMenuItem jMenuItemRegMuseu;
+    private javax.swing.JMenuItem jMenuItemRegObra;
+    private javax.swing.JMenuItem jMenuItemRegUsuario;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

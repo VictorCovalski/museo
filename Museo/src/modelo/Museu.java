@@ -16,6 +16,10 @@ public class Museu {
 	{
 		
 	}
+        public Museu(String nome)
+        {
+            this.nome = nome;
+        }
 	
 	public String getNome()
 	{

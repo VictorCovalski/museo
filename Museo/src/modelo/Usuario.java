@@ -20,6 +20,10 @@ public abstract class Usuario {
     protected String permissaoCadastro[];
     protected String museusPermitidos[];
     
+    public void setMuseusPermitidos(String m[])
+    {
+        museusPermitidos = m.clone();
+    }
     public String[] getMuseusPermitidos()
     {
         return museusPermitidos.clone();
