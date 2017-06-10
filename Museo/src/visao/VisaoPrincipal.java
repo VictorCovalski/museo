@@ -40,7 +40,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        buscaParametro = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -79,7 +79,12 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jLabel2.setText("Buscar");
         jLabel2.setEnabled(false);
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        buscaParametro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        buscaParametro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaParametroActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +125,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2)
+                    .addComponent(buscaParametro)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -170,7 +175,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buscaParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -284,7 +289,10 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String busca = buscaParametro.getText();
+        Principal.currentBusca = busca;
+        ResultadoBusca rb = new ResultadoBusca();
+        rb.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void uiAutentica(String nome)
@@ -344,6 +352,10 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemRegColecaoActionPerformed
 
+    private void buscaParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaParametroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaParametroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -381,6 +393,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField buscaParametro;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonLogin;
@@ -407,6 +420,5 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemRegObra;
     private javax.swing.JMenuItem jMenuItemRegUsuario;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

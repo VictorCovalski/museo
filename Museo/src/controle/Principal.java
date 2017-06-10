@@ -36,6 +36,7 @@ public class Principal {
     private ArrayList<Colecao> colecoesCadastros;
     
     private static Principal instancia;
+    public static String currentBusca;
     
     private void init()
     {
@@ -60,6 +61,24 @@ public class Principal {
         usuariosCadastrados.add(dirTeste);
         usuariosCadastrados.add(pesqTeste);
         usuariosCadastrados.add(coordenador);
+        
+        obras.add(new modelo.Arquitetura("Anglo"));
+        obras.add(new modelo.Arquitetura("Mexicu's Lanches"));
+        obras.add(new modelo.Arquitetura("Bar do Zé"));
+        
+        obras.add(new modelo.Pintura("Monalisa"));
+        obras.add(new modelo.Pintura("Monalinda"));
+        obras.add(new modelo.Pintura("Nascimento de Vênus"));
+        obras.add(new modelo.Pintura("A santa ceia"));
+        obras.add(new modelo.Pintura("O grito"));
+        obras.add(new modelo.Pintura("Sanduiche de Ovo"));
+        
+        obras.add(new modelo.Escultura("O Pensador"));
+        obras.add(new modelo.Escultura("Esfinge                                                                                                                                                                                                             "));
+        obras.add(new modelo.Escultura("Venus de Nilo"));
+        obras.add(new modelo.Escultura("Pietá"));
+        
+                                            
     }
     public static Principal getInstance()
     {
@@ -68,6 +87,12 @@ public class Principal {
             instancia = new Principal();
         }
         return instancia;
+    }
+    public ArrayList<Obra> getObras(){
+        return obras;
+    }
+    public Obra getObra(int index){
+        return obras.get(index);
     }
     public Usuario getUsuarioAutenticado(){
         return usuarioAutenticado;
@@ -231,6 +256,23 @@ public class Principal {
         
         obras.add(new Arquitetura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas,  dataPublicacao
                 , dataAquisicao, localEstante, localPrateleira, localNumero, estilo, linguagem, artistas));
+    }
+    public static int LevDistance(String a, String b) {
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+        int [] costs = new int [b.length() + 1];
+        for (int j = 0; j < costs.length; j++)
+            costs[j] = j;
+        for (int i = 1; i <= a.length(); i++) {
+            costs[0] = i;
+            int nw = i - 1;
+            for (int j = 1; j <= b.length(); j++) {
+                int cj = Math.min(1 + Math.min(costs[j], costs[j - 1]), a.charAt(i - 1) == b.charAt(j - 1) ? nw : nw + 1);
+                nw = costs[j];
+                costs[j] = cj;
+            }
+        }
+        return costs[b.length()];
     }
     public static void main(String[] args) {
         

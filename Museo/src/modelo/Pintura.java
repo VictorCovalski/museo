@@ -35,6 +35,10 @@ public class Pintura extends Obra{
         this.estadoConservacao = estadoConservacao;
         this.autor = autor;
     }
+    public Pintura(String nome)
+    {
+        super(nome);
+    }
    
     public String getTecnica() {
         return tecnica;
