@@ -53,11 +53,13 @@ public class Principal {
         museusCadastrados.add(new Museu("Museu A"));
         museusCadastrados.add(new Museu("Museu B"));
         String m[] = {"Museu A"};
-        Usuario pesqTeste = new modelo.Coordenador("victor","0","rua sem nome,22","01/01/1991","0",m);
+        Usuario pesqTeste = new modelo.Pesquisador("victor","0","rua sem nome,22","01/01/1991","0",m);
         Usuario dirTeste = new Diretor("janine","1","rua sem nome,22","02/01/1991","1",m);
+        Usuario coordenador = new modelo.Coordenador("Guilherme", "2", "bar do ze", "01/01/1991", "2", m);
         
         usuariosCadastrados.add(dirTeste);
         usuariosCadastrados.add(pesqTeste);
+        usuariosCadastrados.add(coordenador);
     }
     public static Principal getInstance()
     {
@@ -67,8 +69,16 @@ public class Principal {
         }
         return instancia;
     }
+    public Usuario getUsuarioAutenticado(){
+        return usuarioAutenticado;
+    }
     public void registraMuseu(String nome, String data, String endereco, String cidade, String estado, String fun1, String fun2, String site, String telefone, String descricao){
         museusCadastrados.add(new Museu(nome, data, endereco, cidade, estado, fun1, fun2, site, telefone, descricao));
+        if(usuarioAutenticado instanceof modelo.Coordenador)
+        {
+            
+        }
+        
     }
     public void registraColecao(String nome, String data, String museu, String descricao)
     {
