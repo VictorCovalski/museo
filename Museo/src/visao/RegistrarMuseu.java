@@ -5,6 +5,8 @@
  */
 package visao;
 import controle.Principal;
+import java.text.ParseException;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -20,6 +22,16 @@ public class RegistrarMuseu extends javax.swing.JFrame {
     public RegistrarMuseu() {
         control = Principal.getInstance();
         initComponents();
+    }
+    public MaskFormatter Mascara(String Mascara){
+        MaskFormatter F_Mascara = new MaskFormatter();
+        try{
+            F_Mascara.setMask(Mascara); //Atribui a mascara
+            F_Mascara.setPlaceholderCharacter(' '); //Caracter para preencimento 
+        }
+        catch (ParseException e) {
+        } 
+        return F_Mascara;
     }
 
     /**
@@ -57,7 +69,7 @@ public class RegistrarMuseu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         HeadingLabel.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         HeadingLabel.setText("Registrar Museu");
@@ -251,6 +263,8 @@ public class RegistrarMuseu extends javax.swing.JFrame {
         String descricao = jDescricao.getText();
         
         control.registraMuseu(nome, data, endereco, cidade, estado, fun1, fun2, site, telefone, descricao);
+        
+        this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

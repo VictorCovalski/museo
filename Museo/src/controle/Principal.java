@@ -7,6 +7,7 @@ package controle;
 
 import java.util.ArrayList;
 import modelo.Arquitetura;
+import modelo.Colecao;
 import modelo.Coordenador;
 import modelo.Diretor;
 import modelo.Escultura;
@@ -32,6 +33,7 @@ public class Principal {
     private ArrayList<Museu> museusCadastrados;
     private ArrayList<Usuario> usuariosCadastrados;
     private ArrayList<Obra> obras;
+    private ArrayList<Colecao> colecoesCadastros;
     
     private static Principal instancia;
     
@@ -40,6 +42,7 @@ public class Principal {
        usuarioAutenticado = new modelo.Visitante();
        museusCadastrados = new ArrayList<>();
        usuariosCadastrados = new ArrayList<>();
+       colecoesCadastros = new ArrayList<>();
        obras = new ArrayList<>();
        
        
@@ -66,6 +69,11 @@ public class Principal {
     }
     public void registraMuseu(String nome, String data, String endereco, String cidade, String estado, String fun1, String fun2, String site, String telefone, String descricao){
         museusCadastrados.add(new Museu(nome, data, endereco, cidade, estado, fun1, fun2, site, telefone, descricao));
+    }
+    public void registraColecao(String nome, String data, String museu, String descricao)
+    {
+        colecoesCadastros.add(new Colecao(nome, data, museu, descricao));
+                
     }
     public void registraPesquisador(String nome,String cpf,String endereco,String dataNascimento,String senha,String museusSelecionados[])
     {

@@ -17,8 +17,6 @@ public class Museu {
         private String horarioFechamento;
         private String site;
         private String telefone;
-        
-	private ArrayList<Colecao> colecoes;
 	
         public Museu(String nome, String data, String endereco, String cidade, String estado, String fun1, String fun2, String site, String telefone, String descricao)
         {
@@ -110,12 +108,5 @@ public class Museu {
             this.telefone = telefone;
         }
 
-        public ArrayList<Colecao> getColecoes() {
-            return colecoes;
-        }
-
-        public void setColecoes(ArrayList<Colecao> colecoes) {
-            this.colecoes = colecoes;
-        }
 
 }

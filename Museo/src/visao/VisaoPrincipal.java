@@ -208,6 +208,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jMenu7.add(jMenuItemRegMuseu);
 
         jMenuItemRegColecao.setText("Coleção");
+        jMenuItemRegColecao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRegColecaoActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItemRegColecao);
 
         jMenuItemRegUsuario.setText("Usuário");
@@ -328,6 +333,16 @@ public class VisaoPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Área Restrita", "Usuário não autorizado", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItemRegMuseuActionPerformed
+
+    private void jMenuItemRegColecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegColecaoActionPerformed
+        if(control.checaPermissaoTecnico())
+        {
+            RegistrarColecao rc = new RegistrarColecao();
+            rc.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Área Restrita", "Usuário não autorizado", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemRegColecaoActionPerformed
 
     /**
      * @param args the command line arguments

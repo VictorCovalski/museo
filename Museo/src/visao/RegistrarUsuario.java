@@ -341,7 +341,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoRegActionPerformed
 
-    private String[] getListaMuseus()
+    public String[] getListaMuseus()
     {
         String museus[] = new String[listModel.size()];
         
