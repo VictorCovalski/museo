@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,13 +35,15 @@ public class RegistrarObra extends javax.swing.JFrame {
      * Creates new form RegistrarObra
      */
     public RegistrarObra() {
+        
+           control = Principal.getInstance();
            initComponents();
            maskData(jFormattedTextDataAquisi);
            maskData(jFormattedTextDataPublic);
        
            jPanelEstilo.setLayout(new java.awt.CardLayout());
            card = (CardLayout)jPanelEstilo.getLayout();
-           control = Principal.getInstance();
+           
     }
     
     private void showTela(Object ob){
@@ -122,6 +125,10 @@ public class RegistrarObra extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jComboBoxMateriais = new javax.swing.JComboBox<>();
         jButtonRemoverMaterial = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jButtonRegistrar = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
@@ -197,8 +204,6 @@ public class RegistrarObra extends javax.swing.JFrame {
             }
         });
 
-        jPanelEstilo.setBorder(null);
-
         javax.swing.GroupLayout jPanelEstiloLayout = new javax.swing.GroupLayout(jPanelEstilo);
         jPanelEstilo.setLayout(jPanelEstiloLayout);
         jPanelEstiloLayout.setHorizontalGroup(
@@ -224,6 +229,26 @@ public class RegistrarObra extends javax.swing.JFrame {
                 jButtonRemoverMaterialActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Museu");
+
+        jComboBox1.setModel(new DefaultComboBoxModel(control.getMuseusUsuario()));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jComboBox1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jComboBox1PropertyChange(evt);
+            }
+        });
+
+        jLabel14.setText("Coleção");
+
+        String museuSelected = jComboBox1.getSelectedItem().toString();
+        String [] cols = control.getColecaoOfMuseu(museuSelected);
+        jComboBox2.setModel(new DefaultComboBoxModel(cols));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -283,13 +308,15 @@ public class RegistrarObra extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
                                 .addComponent(jFormattedTextDataAquisi, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxEstilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanelEstilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBoxEstilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel4))
                                     .addComponent(jLabel10)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel11)
@@ -298,11 +325,19 @@ public class RegistrarObra extends javax.swing.JFrame {
                                         .addGap(70, 70, 70)
                                         .addComponent(jLabel12)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldPrateleira, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(96, 96, 96)
-                                .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldPrateleira, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel14)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -350,7 +385,11 @@ public class RegistrarObra extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jComboBoxEstilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEstilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelEstilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -539,6 +578,16 @@ public class RegistrarObra extends javax.swing.JFrame {
             jComboBoxMateriais.removeItem(jComboBoxMateriais.getSelectedItem());
     }//GEN-LAST:event_jButtonRemoverMaterialActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String museuSelected = jComboBox1.getSelectedItem().toString();
+        String [] cols = control.getColecaoOfMuseu(museuSelected);
+        jComboBox2.setModel(new DefaultComboBoxModel(cols));
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox1PropertyChange
+        
+    }//GEN-LAST:event_jComboBox1PropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -581,6 +630,8 @@ public class RegistrarObra extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonRemoverMaterial;
     private javax.swing.JButton jButtonVoltar;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBoxEstilo;
     private javax.swing.JComboBox<String> jComboBoxMateriais;
     private javax.swing.JComboBox<String> jComboBoxObrasRelacionadas;
@@ -591,10 +642,12 @@ public class RegistrarObra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
