@@ -43,6 +43,11 @@ public abstract class Obra {
         this.localNumero = localNumero;
         
     }
+    //Construtor teste
+    public Obra(String nome)
+    {
+        this.nome = nome;
+    }
     
     public String getNome() {
         return nome;

@@ -12,6 +12,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import controle.Principal;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,6 +30,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         control = Principal.getInstance();
         initComponents();
         jButtonRemover.setEnabled(false); //inicializa com o botão desativado
+        
+        
         
     }
     
@@ -165,7 +168,23 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxPermissao.setModel(new javax.swing.DefaultComboBoxModel<>(control.getMuseusUsuario()));
+        if(control.getUsuarioAutenticado() instanceof modelo.Coordenador)
+        {
+            ArrayList<modelo.Museu> mus = control.getMuseusCadastrados();
+            for(int i = 0;i<mus.size(); i++ ){
+                String str = mus.get(i).getNome();
+                jComboBoxPermissao.addItem(str);
+            }
+        }else{
+
+            jComboBoxPermissao.setModel(new javax.swing.DefaultComboBoxModel<>(control.getMuseusUsuario()));
+
+        }
+        jComboBoxPermissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPermissaoActionPerformed(evt);
+            }
+        });
 
         jButtonAdicionar.setText("Adicionar");
         jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -223,7 +242,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                                             .addComponent(jPasswordField1))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(jButtonAdicionar)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                                             .addComponent(jButtonRemover)))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,7 +360,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoRegActionPerformed
 
-    private String[] getListaMuseus()
+    public String[] getListaMuseus()
     {
         String museus[] = new String[listModel.size()];
         
@@ -457,6 +476,10 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             jPasswordField2.setEchoChar('•');
         }
     }//GEN-LAST:event_jCheckBoxSenhaActionPerformed
+
+    private void jComboBoxPermissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPermissaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPermissaoActionPerformed
 
     /**
      * @param args the command line arguments

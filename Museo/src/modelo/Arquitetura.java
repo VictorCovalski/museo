@@ -26,6 +26,10 @@ public class Arquitetura extends Obra{
         this.linguagem = linguagem;
         this.nomeArtista = nomeArtista;
     }
+    public Arquitetura(String nome)
+    {
+        super(nome);
+    }
 
     public String getEstilo() {
         return estilo;

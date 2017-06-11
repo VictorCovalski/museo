@@ -7,6 +7,7 @@ package controle;
 
 import java.util.ArrayList;
 import modelo.Arquitetura;
+import modelo.Colecao;
 import modelo.Coordenador;
 import modelo.Diretor;
 import modelo.Escultura;
@@ -32,14 +33,17 @@ public class Principal {
     private ArrayList<Museu> museusCadastrados;
     private ArrayList<Usuario> usuariosCadastrados;
     private ArrayList<Obra> obras;
+    private ArrayList<Colecao> colecoesCadastros;
     
     private static Principal instancia;
+    public static String currentBusca;
     
     private void init()
     {
        usuarioAutenticado = new modelo.Visitante();
        museusCadastrados = new ArrayList<>();
        usuariosCadastrados = new ArrayList<>();
+       colecoesCadastros = new ArrayList<>();
        obras = new ArrayList<>();
        
        
@@ -50,11 +54,31 @@ public class Principal {
         museusCadastrados.add(new Museu("Museu A"));
         museusCadastrados.add(new Museu("Museu B"));
         String m[] = {"Museu A"};
-        Usuario pesqTeste = new modelo.Coordenador("victor","0","rua sem nome,22","01/01/1991","0",m);
+        Usuario pesqTeste = new modelo.Pesquisador("victor","0","rua sem nome,22","01/01/1991","0",m);
         Usuario dirTeste = new Diretor("janine","1","rua sem nome,22","02/01/1991","1",m);
+        Usuario coordenador = new modelo.Coordenador("Guilherme", "2", "bar do ze", "01/01/1991", "2", m);
         
         usuariosCadastrados.add(dirTeste);
         usuariosCadastrados.add(pesqTeste);
+        usuariosCadastrados.add(coordenador);
+        
+        obras.add(new modelo.Arquitetura("Anglo"));
+        obras.add(new modelo.Arquitetura("Mexicu's Lanches"));
+        obras.add(new modelo.Arquitetura("Bar do Zé"));
+        
+        obras.add(new modelo.Pintura("Monalisa"));
+        obras.add(new modelo.Pintura("Monalinda"));
+        obras.add(new modelo.Pintura("Nascimento de Vênus"));
+        obras.add(new modelo.Pintura("A santa ceia"));
+        obras.add(new modelo.Pintura("O grito"));
+        obras.add(new modelo.Pintura("Sanduiche de Ovo"));
+        
+        obras.add(new modelo.Escultura("O Pensador"));
+        obras.add(new modelo.Escultura("Esfinge                                                                                                                                                                                                             "));
+        obras.add(new modelo.Escultura("Venus de Nilo"));
+        obras.add(new modelo.Escultura("Pietá"));
+        
+                                            
     }
     public static Principal getInstance()
     {
@@ -64,7 +88,28 @@ public class Principal {
         }
         return instancia;
     }
-    
+    public ArrayList<Obra> getObras(){
+        return obras;
+    }
+    public Obra getObra(int index){
+        return obras.get(index);
+    }
+    public Usuario getUsuarioAutenticado(){
+        return usuarioAutenticado;
+    }
+    public void registraMuseu(String nome, String data, String endereco, String cidade, String estado, String fun1, String fun2, String site, String telefone, String descricao){
+        museusCadastrados.add(new Museu(nome, data, endereco, cidade, estado, fun1, fun2, site, telefone, descricao));
+        if(usuarioAutenticado instanceof modelo.Coordenador)
+        {
+            
+        }
+        
+    }
+    public void registraColecao(String nome, String data, String museu, String descricao)
+    {
+        colecoesCadastros.add(new Colecao(nome, data, museu, descricao));
+                
+    }
     public void registraPesquisador(String nome,String cpf,String endereco,String dataNascimento,String senha,String museusSelecionados[])
     {
         usuariosCadastrados.add(new Pesquisador(nome,cpf,endereco,dataNascimento,senha,museusSelecionados));
@@ -211,6 +256,23 @@ public class Principal {
         
         obras.add(new Arquitetura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas,  dataPublicacao
                 , dataAquisicao, localEstante, localPrateleira, localNumero, estilo, linguagem, artistas));
+    }
+    public static int LevDistance(String a, String b) {
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+        int [] costs = new int [b.length() + 1];
+        for (int j = 0; j < costs.length; j++)
+            costs[j] = j;
+        for (int i = 1; i <= a.length(); i++) {
+            costs[0] = i;
+            int nw = i - 1;
+            for (int j = 1; j <= b.length(); j++) {
+                int cj = Math.min(1 + Math.min(costs[j], costs[j - 1]), a.charAt(i - 1) == b.charAt(j - 1) ? nw : nw + 1);
+                nw = costs[j];
+                costs[j] = cj;
+            }
+        }
+        return costs[b.length()];
     }
     public static void main(String[] args) {
         
