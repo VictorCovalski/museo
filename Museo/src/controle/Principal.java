@@ -265,15 +265,25 @@ public class Principal {
     
     public String[] getColecaoOfMuseu(String m)
     {
-        
-        String selecionados[] = new String[colecoesCadastros.size()];
-        
-        for(int i=0; i < colecoesCadastros.size(); i++)
+        int size = 0;
+        for(int i = 0; i < colecoesCadastros.size(); i++)
         {
             if(colecoesCadastros.get(i).getMuseu().equals(m))
             {
-                selecionados[i] = colecoesCadastros.get(i).getNome();
-                
+                size++;
+            }
+        }
+        
+        String selecionados[] = new String[size];
+        int j = 0;
+        
+        for(int i=0; i < colecoesCadastros.size(); i++)
+        { 
+            if(colecoesCadastros.get(i).getMuseu().equals(m))
+            {
+                selecionados[j] = colecoesCadastros.get(i).getNome();
+                j++;
+
             }
         }
         return selecionados;
