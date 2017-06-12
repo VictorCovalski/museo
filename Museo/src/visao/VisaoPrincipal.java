@@ -329,6 +329,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         if (resposta == JOptionPane.YES_OPTION) {
           control.autenticaVisitante();
           jButtonLogout.setEnabled(false);
+          jLabelNomeUsuario.setText("Visitante");
         }
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 

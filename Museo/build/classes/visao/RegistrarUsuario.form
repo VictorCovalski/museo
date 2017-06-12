@@ -88,7 +88,7 @@
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Component id="jButtonAdicionar" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
+                                              <EmptySpace pref="19" max="32767" attributes="0"/>
                                               <Component id="jButtonRemover" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -374,11 +374,15 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxPermissao">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(control.getMuseusUsuario())" type="code"/>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxPermissaoActionPerformed"/>
+          </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(control.getUsuarioAutenticado() instanceof modelo.Coordenador)&#xa;        {&#xa;            ArrayList&lt;modelo.Museu&gt; mus = control.getMuseusCadastrados();&#xa;            for(int i = 0;i&lt;mus.size(); i++ ){  &#xa;                String str = mus.get(i).getNome();  &#xa;               jComboBoxPermissao.addItem(str);&#xa;           }&#xa;        }else{&#xa;&#xa;jComboBoxPermissao.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(control.getMuseusUsuario()));&#xa; &#xa;}"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>

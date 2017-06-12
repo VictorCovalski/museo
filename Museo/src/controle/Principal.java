@@ -55,11 +55,11 @@ public class Principal {
         museusCadastrados.add(new Museu("Museu B"));
         String m[] = {"Museu A"};
         String mAB[] = {"Museu A", "Museu B"};
-        Usuario pesqTeste = new modelo.Pesquisador("victor","0","rua sem nome,22","01/01/1991","0",m);
-        Usuario dirTeste = new Diretor("janine","1","rua sem nome,22","02/01/1991","1",m);
-        Usuario coordenador = new modelo.Coordenador("Guilherme", "2", "bar do ze", "01/01/1991", "2", m);
-        Usuario tecnicoA = new modelo.Tecnico("Tecnico A", "3", "bar do ze", "01/01/1991", "3", m);        
-        Usuario tecnicoAB = new modelo.Tecnico("Tecnico A B", "4", "bar do ze", "01/01/1991", "4", mAB);
+        Usuario pesqTeste = new modelo.Pesquisador("Usuario Pesquisador","000.000.000-00","rua sem nome,22","01/01/1991","0",m);
+        Usuario dirTeste = new Diretor("Usuario Diretor","111.111.111-11","rua sem nome,22","02/01/1991","1",m);
+        Usuario coordenador = new modelo.Coordenador("Usuario Coordenador", "222.222.222-22", "bar do ze", "01/01/1991", "2", m);
+        Usuario tecnicoA = new modelo.Tecnico("Tecnico A", "333.333.333-33", "bar do ze", "01/01/1991", "3", m);        
+        Usuario tecnicoAB = new modelo.Tecnico("Tecnico A B", "444.444.444-44", "bar do ze", "01/01/1991", "4", mAB);
         
         usuariosCadastrados.add(tecnicoA);
         usuariosCadastrados.add(tecnicoAB);
