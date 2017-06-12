@@ -22,6 +22,7 @@ public abstract class Obra {
     private String dataAquisicao;
     private String localEstante;
     private String localPrateleira;
+    private String museu;
     private int localNumero;
     //private Tecnico registradoPor;
     
@@ -136,6 +137,15 @@ public abstract class Obra {
     public void setLocalNumero(int localNumero) {
         this.localNumero = localNumero;
     }
+
+    public String getMuseu() {
+        return museu;
+    }
+
+    public void setMuseu(String museu) {
+        this.museu = museu;
+    }
+    
     
     
 }

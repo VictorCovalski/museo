@@ -54,10 +54,15 @@ public class Principal {
         museusCadastrados.add(new Museu("Museu A"));
         museusCadastrados.add(new Museu("Museu B"));
         String m[] = {"Museu A"};
+        String mAB[] = {"Museu A", "Museu B"};
         Usuario pesqTeste = new modelo.Pesquisador("victor","0","rua sem nome,22","01/01/1991","0",m);
         Usuario dirTeste = new Diretor("janine","1","rua sem nome,22","02/01/1991","1",m);
         Usuario coordenador = new modelo.Coordenador("Guilherme", "2", "bar do ze", "01/01/1991", "2", m);
+        Usuario tecnicoA = new modelo.Tecnico("Tecnico A", "3", "bar do ze", "01/01/1991", "3", m);        
+        Usuario tecnicoAB = new modelo.Tecnico("Tecnico A B", "4", "bar do ze", "01/01/1991", "4", mAB);
         
+        usuariosCadastrados.add(tecnicoA);
+        usuariosCadastrados.add(tecnicoAB);
         usuariosCadastrados.add(dirTeste);
         usuariosCadastrados.add(pesqTeste);
         usuariosCadastrados.add(coordenador);
@@ -257,6 +262,41 @@ public class Principal {
         obras.add(new Arquitetura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas,  dataPublicacao
                 , dataAquisicao, localEstante, localPrateleira, localNumero, estilo, linguagem, artistas));
     }
+    
+    public String[] getColecaoOfMuseu(String m)
+    {
+        int size = 0;
+        for(int i = 0; i < colecoesCadastros.size(); i++)
+        {
+            if(colecoesCadastros.get(i).getMuseu().equals(m))
+            {
+                size++;
+            }
+        }
+        
+        String selecionados[] = new String[size];
+        int j = 0;
+        
+        for(int i=0; i < colecoesCadastros.size(); i++)
+        { 
+            if(colecoesCadastros.get(i).getMuseu().equals(m))
+            {
+                selecionados[j] = colecoesCadastros.get(i).getNome();
+                j++;
+
+            }
+        }
+        return selecionados;
+    }
+
+    public ArrayList<Colecao> getColecoesCadastros() {
+        return colecoesCadastros;
+    }
+
+    public void setColecoesCadastros(ArrayList<Colecao> colecoesCadastros) {
+        this.colecoesCadastros = colecoesCadastros;
+    }
+    
     public static int LevDistance(String a, String b) {
         a = a.toLowerCase();
         b = b.toLowerCase();
