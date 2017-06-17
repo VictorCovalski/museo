@@ -11,9 +11,9 @@ package modelo;
  */
 public class Pesquisador extends Visitante{  
    
-    public Pesquisador(String nome,String cpf,String endereco,String dataNascimento,String senha,String museus[]) 
+    public Pesquisador(String nome,String cpf,String email,String senha,String museus[]) 
    {
-       super(nome,cpf,endereco,dataNascimento,senha);
+       super(nome,cpf,email,senha);
        this.museusPermitidos = museus;
    }
      

@@ -5,8 +5,6 @@
  */
 package modelo;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author tech
@@ -17,19 +15,12 @@ public class Visitante extends Usuario{
     {
         this.nome = "Visitante";
     }
-    public Visitante(String nome,String cpf,String endereco,String dataNascimento,String senha)
+    public Visitante(String nome,String cpf,String email,String senha)
     {
         this.nome = nome;
         this.cpf = cpf;
-        this.endereco = endereco;
-        this.dataNascimento = dataNascimento;
+        this.email = email;
         this.senha = senha;
     }
-    @Override
-   public ArrayList<Obra> buscaObra(String titulo)
-   {
-       ArrayList<Obra> obras = new ArrayList<>();
-       return obras;
-   }
     
 }

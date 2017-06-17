@@ -55,17 +55,17 @@ public class Principal {
         museusCadastrados.add(new Museu("Museu B"));
         String m[] = {"Museu A"};
         String mAB[] = {"Museu A", "Museu B"};
-        Usuario pesqTeste = new modelo.Pesquisador("Usuario Pesquisador","000.000.000-00","rua sem nome,22","01/01/1991","0",m);
-        Usuario dirTeste = new Diretor("Usuario Diretor","111.111.111-11","rua sem nome,22","02/01/1991","1",m);
-        Usuario coordenador = new modelo.Coordenador("Usuario Coordenador", "222.222.222-22", "bar do ze", "01/01/1991", "2", m);
-        Usuario tecnicoA = new modelo.Tecnico("Tecnico A", "333.333.333-33", "bar do ze", "01/01/1991", "3", m);        
-        Usuario tecnicoAB = new modelo.Tecnico("Tecnico A B", "444.444.444-44", "bar do ze", "01/01/1991", "4", mAB);
+        Usuario pesqTeste = new modelo.Pesquisador("Usuario Pesquisador","000.000.000-00","pesquisador@ufpel.edu.br","0",m);
+        Usuario dirTeste = new Diretor("Usuario Diretor","111.111.111-11","diretor@ufpel.edu.br","1",m);
+        Usuario coordenador = new modelo.Coordenador("Usuario Coordenador", "222.222.222-22", "coordenador@ufpel.edu.br","2", m);
+       // Usuario tecnicoA = new modelo.Tecnico("Tecnico A", "333.333.333-33", "3", m);        
+       // Usuario tecnicoAB = new modelo.Tecnico("Tecnico A B", "444.444.444-44","4", mAB);
         
-        usuariosCadastrados.add(tecnicoA);
-        usuariosCadastrados.add(tecnicoAB);
+        //usuariosCadastrados.add(tecnicoA);
+        //usuariosCadastrados.add(tecnicoAB);
         usuariosCadastrados.add(dirTeste);
         usuariosCadastrados.add(pesqTeste);
-        usuariosCadastrados.add(coordenador);
+       // usuariosCadastrados.add(coordenador);
         
         obras.add(new modelo.Arquitetura("Anglo"));
         obras.add(new modelo.Arquitetura("Mexicu's Lanches"));
@@ -115,21 +115,21 @@ public class Principal {
         colecoesCadastros.add(new Colecao(nome, data, museu, descricao));
                 
     }
-    public void registraPesquisador(String nome,String cpf,String endereco,String dataNascimento,String senha,String museusSelecionados[])
+    public void registraPesquisador(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {
-        usuariosCadastrados.add(new Pesquisador(nome,cpf,endereco,dataNascimento,senha,museusSelecionados));
+        usuariosCadastrados.add(new Pesquisador(nome,cpf,email,senha,museusSelecionados));
     }
-    public void registraTecnico(String nome,String cpf,String endereco,String dataNascimento,String senha,String museusSelecionados[])
+    public void registraTecnico(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {
-        usuariosCadastrados.add(new Tecnico(nome,cpf,endereco,dataNascimento,senha,museusSelecionados));
+        usuariosCadastrados.add(new Tecnico(nome,cpf,email,senha,museusSelecionados));
     }
-    public void registraDiretor(String nome,String cpf,String endereco,String dataNascimento,String senha,String museusSelecionados[])
+    public void registraDiretor(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {  
-         usuariosCadastrados.add(new Diretor(nome,cpf,endereco,dataNascimento,senha,museusSelecionados));
+         usuariosCadastrados.add(new Diretor(nome,cpf,email,senha,museusSelecionados));
     }
-    public void registraCoordenador(String nome,String cpf,String endereco,String dataNascimento,String senha,String museusSelecionados[])
+    public void registraCoordenador(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {
-        usuariosCadastrados.add(new Coordenador(nome,cpf,endereco,dataNascimento,senha,museusSelecionados));
+        usuariosCadastrados.add(new Coordenador(nome,cpf,email,senha,museusSelecionados));
     }
     public boolean checaPermissaoTecnico()
     {
@@ -160,7 +160,7 @@ public class Principal {
     }
     
     public ArrayList<Usuario> getUsuariosCadastrados() {
-        return usuariosCadastrados;
+        return usuariosCadastrados;      
     }
 
     public void setUsuariosCadastrados(ArrayList<Usuario> usuariosCadastrados) {
@@ -213,7 +213,16 @@ public class Principal {
         return false;
     }
     
-    
+    public Usuario getUsuario(String cpf)
+    {
+        for (int i = 0; i < usuariosCadastrados.size(); i++) {
+            if(usuariosCadastrados.get(i).getCpf().equals(cpf))
+            {
+                return usuariosCadastrados.get(i);
+            }
+        }
+        return null;
+    }
     /*
     Verifica se o cpf informado já consta no cadastro
     */
