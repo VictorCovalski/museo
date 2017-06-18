@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package modelo;
-
-import java.util.ArrayList;
-
 /**
  *
  * @author tech
@@ -14,8 +11,9 @@ import java.util.ArrayList;
 public abstract class Usuario {
     protected String nome;
     protected String cpf;
-    protected String endereco;
-    protected String dataNascimento;
+    protected String email;
+
+   
     protected String senha;
     protected String permissaoCadastro[];
     protected String museusPermitidos[];
@@ -31,8 +29,13 @@ public abstract class Usuario {
     public String[] getPermissaoCadastro() {
         return permissaoCadastro;
     }
-    public abstract ArrayList<Obra> buscaObra(String titulo);
+     public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public String getNome() {
         return nome;
     }
@@ -47,22 +50,6 @@ public abstract class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
     }
 
     public String getSenha() {

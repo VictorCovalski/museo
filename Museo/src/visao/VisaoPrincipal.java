@@ -8,8 +8,8 @@ package visao;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import controle.Principal;
-import javax.swing.JButton;
-import modelo.Tecnico;
+
+
 
 /**
  *
@@ -233,6 +233,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jMenuConUsuario.setText("Consultar");
 
         jMenuItem11.setText("Usuário");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenuConUsuario.add(jMenuItem11);
 
         jMenuItemConObra.setText("Obra");
@@ -339,7 +344,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
             RegistrarMuseu rm = new RegistrarMuseu();
             rm.setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(this, "Área Restrita", "Usuário não autorizado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Usuário não autorizado", "Área Restrita", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItemRegMuseuActionPerformed
 
@@ -349,13 +354,24 @@ public class VisaoPrincipal extends javax.swing.JFrame {
             RegistrarColecao rc = new RegistrarColecao();
             rc.setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(this, "Área Restrita", "Usuário não autorizado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Usuário não autorizado", "Área Restrita", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItemRegColecaoActionPerformed
 
     private void buscaParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaParametroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buscaParametroActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        if(control.checaPermissaoTecnico())
+        {
+            ListarUsuarios lu = new ListarUsuarios();
+            lu.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Usuário não autorizado", "Área Restrita", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments
