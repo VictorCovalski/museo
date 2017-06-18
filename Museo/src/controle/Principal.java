@@ -145,6 +145,42 @@ public class Principal {
     }
     
     /*
+        Retorna lista de usuarios que contem em seu nome, o valor passado
+        @param nome -  nome utilizado na busca
+        @return lista de usuarios 
+    */
+    public ArrayList<Usuario> buscaUsuariosNome(String nome)
+    {
+        ArrayList<Usuario> listaUsuarios = new ArrayList();
+        for(Usuario u : usuariosCadastrados)
+        {
+            if(u.getNome().toLowerCase().contains(nome.toLowerCase()))
+            {
+                if(u.getClass().isInstance(usuarioAutenticado))
+                {
+                    listaUsuarios.add(u);       
+                }
+            }
+        }
+        return listaUsuarios;
+    }
+    
+    public ArrayList<Usuario> buscaUsuariosCPF(String cpf)
+    {
+        ArrayList<Usuario> listaUsuarios = new ArrayList();
+        for(Usuario u : usuariosCadastrados)
+        {
+            if(u.getCpf().contains(cpf))
+            {
+                if(u.getClass().isInstance(usuarioAutenticado))
+                {
+                    listaUsuarios.add(u);
+                }
+            }
+        }
+        return listaUsuarios;
+    }
+    /*
         Retorna lista de museus a qual o usuario autenticado pertence
     */
     public String[] getMuseusUsuario()

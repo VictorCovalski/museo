@@ -51,7 +51,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         return false;
    }
     
-    public MaskFormatter Mascara(String Mascara){
+    public static MaskFormatter Mascara(String Mascara){
         MaskFormatter F_Mascara = new MaskFormatter();
         try{
             F_Mascara.setMask(Mascara); //Atribui a mascara
