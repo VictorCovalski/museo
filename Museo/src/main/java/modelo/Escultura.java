@@ -46,6 +46,10 @@ public class Escultura extends Obra{
         this.circunferenciaMaior = circunferenciaMaior;
         this.circunferenciaMenor = circunferenciaMenor;
     }
+    public Escultura()
+    {
+        
+    }
     public Escultura(String nome)
     {
         super(nome);

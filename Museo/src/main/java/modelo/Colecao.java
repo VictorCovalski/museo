@@ -14,6 +14,10 @@ public class Colecao {
         private String museu;
         private String descricao;
 	
+        public Colecao()
+        {
+            
+        }
 	public Colecao(String nome, String data, String museu, String descricao)
 	{
 		this.nome = nome;

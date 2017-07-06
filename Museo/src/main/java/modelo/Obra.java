@@ -5,14 +5,26 @@
  */
 package modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.ArrayList;
 
 /**
  *
  * @author gleider
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Pintura.class, name = "Pintura"),
+    @JsonSubTypes.Type(value = Escultura.class, name = "Escultura") }
+)
 public abstract class Obra {
     private String nome;
+    private String identificador;
+
+   
     private String titulo;
     private String paisOrigem;
     private String procedencia;
@@ -44,12 +56,22 @@ public abstract class Obra {
         this.localNumero = localNumero;
         
     }
+    public Obra()
+    {
+        
+    }
     //Construtor teste
     public Obra(String nome)
     {
         this.nome = nome;
     }
-    
+     public String getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
+    }
     public String getNome() {
         return nome;
     }
