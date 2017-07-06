@@ -36,6 +36,7 @@ public class Principal {
     private ArrayList<Colecao> colecoesCadastros;
     
     private static Principal instancia;
+    private Elasticsearch elastic;
     public static String currentBusca;
     
     private void init()
@@ -45,7 +46,7 @@ public class Principal {
        usuariosCadastrados = new ArrayList<>();
        colecoesCadastros = new ArrayList<>();
        obras = new ArrayList<>();
-       
+       elastic = new Elasticsearch("localhost","9200");
        
     }
     private Principal()
