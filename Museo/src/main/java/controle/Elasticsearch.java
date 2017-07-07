@@ -24,13 +24,9 @@ import modelo.Obra;
  */
 public class Elasticsearch {
     
-    //private String host = "localhost";
-    //private String port = "9200";
     private RestClientBuilder builder;
     private JsonNodeFactory factory = JsonNodeFactory.instance;
     private ObjectMapper objectMapper;
-    public static boolean UPDATE = true;
-    public static boolean NO_UPDATE = false;
     
     public Elasticsearch(String host,String port)
     {

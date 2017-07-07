@@ -33,7 +33,6 @@ public class Principal {
     private Usuario usuarioAutenticado;
     private ArrayList<Museu> museusCadastrados;
     private ArrayList<Usuario> usuariosCadastrados;
-    private ArrayList<Obra> obras;
     private ArrayList<Colecao> colecoesCadastros;
     
     private static Principal instancia;
@@ -46,7 +45,6 @@ public class Principal {
        museusCadastrados = new ArrayList<>();
        usuariosCadastrados = new ArrayList<>();
        colecoesCadastros = new ArrayList<>();
-       obras = new ArrayList<>();
        elastic = new Elasticsearch("localhost","9200");
        
     }
@@ -56,21 +54,13 @@ public class Principal {
         museusCadastrados.add(new Museu("Museu A"));
         museusCadastrados.add(new Museu("Museu B"));
         String m[] = {"Museu A"};
-        String mAB[] = {"Museu A", "Museu B"};
+        String m1[] = {"Museu A","Museu B"};
         Usuario pesqTeste = new modelo.Pesquisador("Usuario Pesquisador","000.000.000-00","pesquisador@ufpel.edu.br","0",m);
         Usuario dirTeste = new Diretor("Usuario Diretor","111.111.111-11","diretor@ufpel.edu.br","1",m);
-        Usuario coordenador = new modelo.Coordenador("Usuario Coordenador", "222.222.222-22", "coordenador@ufpel.edu.br","2", m);
-       // Usuario tecnicoA = new modelo.Tecnico("Tecnico A", "333.333.333-33", "3", m);        
-       // Usuario tecnicoAB = new modelo.Tecnico("Tecnico A B", "444.444.444-44","4", mAB);
-        
-        //usuariosCadastrados.add(tecnicoA);
-        //usuariosCadastrados.add(tecnicoAB);
+        Usuario coordenador = new modelo.Coordenador("Usuario Coordenador", "222.222.222-22", "coordenador@ufpel.edu.br","2",m1);
         usuariosCadastrados.add(dirTeste);
         usuariosCadastrados.add(pesqTeste);
-       // usuariosCadastrados.add(coordenador);
-        
-        
-                                            
+        usuariosCadastrados.add(coordenador);                                 
     }
     public static Principal getInstance()
     {
@@ -79,12 +69,6 @@ public class Principal {
             instancia = new Principal();
         }
         return instancia;
-    }
-    public ArrayList<Obra> getObras(){
-        return obras;
-    }
-    public Obra getObra(int index){
-        return obras.get(index);
     }
     public Usuario getUsuarioAutenticado(){
         return usuarioAutenticado;
@@ -262,9 +246,6 @@ public class Principal {
 	for (String countryCode : locales) {
 	    Locale obj = new Locale("", countryCode);
 	    paises[i] = obj.getDisplayCountry(locale);
-            //paises[i] = obj.getCountry();
-            System.out.println("Country Code = " + obj.getCountry()
-		+ ", Country Name = " + paises[i]);//obj.getDisplayCountry(locale));
             i++;
         }
         return paises;
@@ -322,23 +303,6 @@ public class Principal {
         this.colecoesCadastros = colecoesCadastros;
     }
     
-    public static int LevDistance(String a, String b) {
-        a = a.toLowerCase();
-        b = b.toLowerCase();
-        int [] costs = new int [b.length() + 1];
-        for (int j = 0; j < costs.length; j++)
-            costs[j] = j;
-        for (int i = 1; i <= a.length(); i++) {
-            costs[0] = i;
-            int nw = i - 1;
-            for (int j = 1; j <= b.length(); j++) {
-                int cj = Math.min(1 + Math.min(costs[j], costs[j - 1]), a.charAt(i - 1) == b.charAt(j - 1) ? nw : nw + 1);
-                nw = costs[j];
-                costs[j] = cj;
-            }
-        }
-        return costs[b.length()];
-    }
     public static void main(String[] args) {
         
         Principal p = getInstance();

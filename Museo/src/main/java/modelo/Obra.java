@@ -119,14 +119,6 @@ public abstract class Obra {
         this.material = material;
     }
 
-    public ArrayList<String> getObrasRelacionadas() {
-        return obrasRelacionadas;
-    }
-
-    public void setObrasRelacionadas(ArrayList<String> obrasRelacionadas) {
-        this.obrasRelacionadas = obrasRelacionadas;
-    }
-
     public String getDataPublicacao() {
         return dataPublicacao;
     }
