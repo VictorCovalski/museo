@@ -6,6 +6,7 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import modelo.Arquitetura;
 import modelo.Colecao;
 import modelo.Coordenador;
@@ -68,21 +69,6 @@ public class Principal {
         usuariosCadastrados.add(pesqTeste);
        // usuariosCadastrados.add(coordenador);
         
-        obras.add(new modelo.Arquitetura("Anglo"));
-        obras.add(new modelo.Arquitetura("Mexicu's Lanches"));
-        obras.add(new modelo.Arquitetura("Bar do Zé"));
-        
-        obras.add(new modelo.Pintura("Monalisa"));
-        obras.add(new modelo.Pintura("Monalinda"));
-        obras.add(new modelo.Pintura("Nascimento de Vênus"));
-        obras.add(new modelo.Pintura("A santa ceia"));
-        obras.add(new modelo.Pintura("O grito"));
-        obras.add(new modelo.Pintura("Sanduiche de Ovo"));
-        
-        obras.add(new modelo.Escultura("O Pensador"));
-        obras.add(new modelo.Escultura("Esfinge                                                                                                                                                                                                             "));
-        obras.add(new modelo.Escultura("Venus de Nilo"));
-        obras.add(new modelo.Escultura("Pietá"));
         
                                             
     }
@@ -103,13 +89,16 @@ public class Principal {
     public Usuario getUsuarioAutenticado(){
         return usuarioAutenticado;
     }
-    public void registraMuseu(String nome, String data, String endereco, String cidade, String estado, String fun1, String fun2, String site, String telefone, String descricao){
-        museusCadastrados.add(new Museu(nome, data, endereco, cidade, estado, fun1, fun2, site, telefone, descricao));
+    public void registraMuseu(String nome, String data, String endereco, String cidade, String estado, String fun1, String fun2, String site, String telefone, String descricao){    
         if(usuarioAutenticado instanceof modelo.Coordenador)
         {
-            
-        }
+             museusCadastrados.add(new Museu(nome, data, endereco, cidade, estado, fun1, fun2, site, telefone, descricao));
+         }
         
+    }
+    public boolean registraObra(Obra o,boolean update)
+    {
+        return elastic.insereObra(o, update);
     }
     public void registraColecao(String nome, String data, String museu, String descricao)
     {
@@ -260,6 +249,26 @@ public class Principal {
         }
         return null;
     }
+   
+    /*
+        Classe utilitaria, retorna lista de paises
+    */
+    public static String[] getListaPais()
+    {
+        String[] locales = Locale.getISOCountries();
+        String[] paises = new String[locales.length];
+        Locale locale = new Locale("pt","BR");
+        int i = 0;
+	for (String countryCode : locales) {
+	    Locale obj = new Locale("", countryCode);
+	    paises[i] = obj.getDisplayCountry(locale);
+            //paises[i] = obj.getCountry();
+            System.out.println("Country Code = " + obj.getCountry()
+		+ ", Country Name = " + paises[i]);//obj.getDisplayCountry(locale));
+            i++;
+        }
+        return paises;
+    }
     /*
     Verifica se o cpf informado já consta no cadastro
     */
@@ -278,36 +287,6 @@ public class Principal {
         this.usuarioAutenticado = new modelo.Visitante();
     }
     
-
-    public void registrarPintura(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
-            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
-            , String localPrateleira, int localNumero, ArrayList<String> autores, double altura
-            , double comprimento, String estado, double largura, double peso, String tecnica){
-     
-        
-        obras.add(new Pintura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao, dataAquisicao
-                , localEstante, localPrateleira, localNumero, tecnica, peso, comprimento, largura, altura, estado, autores));
-        
-      
-    }
-    public void registrarEscultura(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
-            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
-            , String localPrateleira, int localNumero, ArrayList<String> autores, ArrayList<String> materiais, double altura
-            , double comprimento, double espessura, String forma, double largura, double maiorCirc, double menorCirc
-            , double peso, double profundidade, String tecnica){
-        
-        obras.add(new Escultura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao, dataAquisicao
-            , localEstante, localPrateleira, localNumero, tecnica, forma, materiais, autores, peso, comprimento, largura
-            , altura, espessura, profundidade, maiorCirc, menorCirc));
-    }
-    
-    public void registrarArquitetura(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
-            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
-            , String localPrateleira, int localNumero, ArrayList<String> artistas, String estilo, String linguagem){
-        
-        obras.add(new Arquitetura(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas,  dataPublicacao
-                , dataAquisicao, localEstante, localPrateleira, localNumero, estilo, linguagem, artistas));
-    }
     
     public String[] getColecaoOfMuseu(String m)
     {
@@ -363,6 +342,7 @@ public class Principal {
     public static void main(String[] args) {
         
         Principal p = getInstance();
+        p.autenticaUsuario("111.111.111-11","1");
         VisaoPrincipal vp = new VisaoPrincipal();
         vp.setVisible(true);
     }

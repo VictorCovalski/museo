@@ -6,9 +6,6 @@
 package visao;
 
 import java.util.ArrayList;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-
 /**
  *
  * @author gleider
@@ -38,16 +35,16 @@ public class RegistrarEscultura extends javax.swing.JPanel {
     }
 
     public ArrayList<String> getjComboBoxAutores() {
-        ArrayList<String> autores = new ArrayList<String>();
-        for(int i=1;i<jComboBoxAutores.getHeight();i++){
+        ArrayList<String> autores = new ArrayList<>();
+        for(int i=1;i<jComboBoxAutores.getItemCount();i++){
             autores.add(jComboBoxAutores.getItemAt(i));
         }
         return autores;
     }
 
     public ArrayList<String> getjComboBoxMateriais() {
-        ArrayList<String> materiais = new ArrayList<String>();
-        for(int i=1;i<jComboBoxMateriais.getHeight();i++){
+        ArrayList<String> materiais = new ArrayList<>();
+        for(int i=1;i<jComboBoxMateriais.getItemCount();i++){
             materiais.add(jComboBoxMateriais.getItemAt(i));
         }
         return materiais;

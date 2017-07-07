@@ -18,20 +18,20 @@ import java.util.ArrayList;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Pintura.class, name = "Pintura"),
-    @JsonSubTypes.Type(value = Escultura.class, name = "Escultura") }
+    @JsonSubTypes.Type(value = Escultura.class, name = "Escultura"),
+    @JsonSubTypes.Type(value = Arquitetura.class, name = "Arquitetura")}
 )
+
 public abstract class Obra {
     private String nome;
     private String identificador;
-
-   
     private String titulo;
     private String paisOrigem;
     private String procedencia;
     private ArrayList<String> material;
-    private ArrayList<String> obrasRelacionadas;
     private String dataPublicacao;
     private String dataAquisicao;
+    private String dataCadastro;
     private String localEstante;
     private String localPrateleira;
     private String museu;
@@ -40,7 +40,7 @@ public abstract class Obra {
     
     
     public Obra(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
-            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
+            , String dataPublicacao, String dataAquisicao, String localEstante
             , String localPrateleira, int localNumero){
         
         this.nome = nome;
@@ -48,7 +48,6 @@ public abstract class Obra {
         this.paisOrigem = paisOrigem;
         this.procedencia = procedencia;
         this.material = material;
-        this.obrasRelacionadas = obrasRelacionadas;
         this.dataPublicacao = dataPublicacao;
         this.dataAquisicao = dataAquisicao;
         this.localEstante = localEstante;
@@ -82,6 +81,14 @@ public abstract class Obra {
 
     public String getTitulo() {
         return titulo;
+    }
+
+    public String getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     public void setTitulo(String titulo) {

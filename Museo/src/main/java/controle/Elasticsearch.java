@@ -34,7 +34,7 @@ public class Elasticsearch {
     
     public Elasticsearch(String host,String port)
     {
-        builder = RestClient.builder(new HttpHost(host,Integer.valueOf(port),port));
+        builder = RestClient.builder(new HttpHost(host,Integer.valueOf(port),"http"));
         objectMapper = new ObjectMapper();
     }
        
@@ -46,7 +46,7 @@ public class Elasticsearch {
     */
     public boolean verificaObra(String identificador)
     {
-        return true;
+        return false;
     }
     public boolean insereObra(Obra o,boolean atualizaRegistro)
     {

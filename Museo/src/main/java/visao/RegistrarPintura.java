@@ -6,8 +6,6 @@
 package visao;
 
 import java.util.ArrayList;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 
 /**
  *
@@ -34,8 +32,8 @@ public class RegistrarPintura extends javax.swing.JPanel {
     }
 
     public ArrayList<String> getjComboBoxAutores() {
-        ArrayList<String> autores = new ArrayList<String>();
-        for(int i=1;i<jComboBoxAutores.getHeight();i++){
+        ArrayList<String> autores = new ArrayList<>();
+        for(int i=1;i<jComboBoxAutores.getItemCount();i++){
            autores.add(jComboBoxAutores.getItemAt(i));
         }
         return autores;

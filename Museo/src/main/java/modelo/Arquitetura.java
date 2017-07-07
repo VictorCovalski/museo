@@ -14,17 +14,17 @@ import java.util.ArrayList;
 public class Arquitetura extends Obra{
     private String estilo;
     private String linguagem;
-    private ArrayList<String> nomeArtista;
+    private ArrayList<String> Autor;
     
     public Arquitetura(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
-            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
+            , String dataPublicacao, String dataAquisicao, String localEstante
             , String localPrateleira, int localNumero, String estilo, String linguagem, ArrayList<String> nomeArtista){
         
-        super(nome, titulo, paisOrigem, procedencia, material, obrasRelacionadas, dataPublicacao, dataAquisicao
+        super(nome, titulo, paisOrigem, procedencia, material, dataPublicacao, dataAquisicao
                 , localEstante, localPrateleira, localNumero);
         this.estilo = estilo;
         this.linguagem = linguagem;
-        this.nomeArtista = nomeArtista;
+        this.Autor = nomeArtista;
     }
     public Arquitetura(String nome)
     {
@@ -47,12 +47,12 @@ public class Arquitetura extends Obra{
         this.linguagem = linguagem;
     }
 
-    public ArrayList<String> getNomeArtista() {
-        return nomeArtista;
+    public ArrayList<String> getAutor() {
+        return Autor;
     }
 
-    public void setNomeArtista(ArrayList<String> nomeArtista) {
-        this.nomeArtista = nomeArtista;
+    public void setAutor(ArrayList<String> nomeArtista) {
+        this.Autor = nomeArtista;
     }
     
     
