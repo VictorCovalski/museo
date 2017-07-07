@@ -26,6 +26,7 @@ public abstract class Obra {
     private String nome;
     private String identificador;
     private String titulo;
+    private String colecao;
     private String paisOrigem;
     private String procedencia;
     private ArrayList<String> material;
@@ -166,7 +167,27 @@ public abstract class Obra {
     public void setMuseu(String museu) {
         this.museu = museu;
     }
+
+    public String getColecao() {
+        return colecao;
+    }
+
+    public void setColecao(String colecao) {
+        this.colecao = colecao;
+    }
     
-    
+    public Object[] toTabela(int tablesize)
+    {
+        Object o[] = new Object[tablesize];
+        o[0] = this.identificador;
+        o[1] = this.nome;
+        o[2] = this.colecao;
+        o[3] = this.paisOrigem;
+        o[4] = this.museu;
+        o[5] = this.dataCadastro;
+        o[6] = this.dataPublicacao;
+        
+        return o;
+    }
     
 }

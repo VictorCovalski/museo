@@ -7,15 +7,13 @@ package controle;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import modelo.Arquitetura;
+import javax.swing.JFrame;
 import modelo.Colecao;
 import modelo.Coordenador;
 import modelo.Diretor;
-import modelo.Escultura;
 import modelo.Museu;
 import modelo.Obra;
 import modelo.Pesquisador;
-import modelo.Pintura;
 import modelo.Tecnico;
 import modelo.Usuario;
 
@@ -37,7 +35,7 @@ public class Principal {
     
     private static Principal instancia;
     private Elasticsearch elastic;
-    public static String currentBusca;
+    public static Obra[] resultadoBusca;
     
     private void init()
     {
@@ -46,7 +44,7 @@ public class Principal {
        usuariosCadastrados = new ArrayList<>();
        colecoesCadastros = new ArrayList<>();
        elastic = new Elasticsearch("localhost","9200");
-       
+
     }
     private Principal()
     {
@@ -309,6 +307,9 @@ public class Principal {
         p.autenticaUsuario("111.111.111-11","1");
         VisaoPrincipal vp = new VisaoPrincipal();
         vp.setVisible(true);
+        vp.setTitle("Museo - Sistema Integrado de Museus");
+        vp.setLocationRelativeTo(null); //centraliza janela
+        vp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
 }

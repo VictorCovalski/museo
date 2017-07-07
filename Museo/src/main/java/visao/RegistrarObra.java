@@ -538,6 +538,8 @@ public class RegistrarObra extends javax.swing.JFrame {
             obra.setDataCadastro(timeStamp);
             obra.setIdentificador(identificador);
             obra.setMuseu((String)jComboBoxMuseu.getSelectedItem());
+            obra.setColecao((String)jComboBoxColecao.getSelectedItem());
+            
             if(control.registraObra(obra,jCheckBoxOverwrite.isSelected()))
             {
                 JOptionPane.showMessageDialog(null, "Registrado com sucesso");
