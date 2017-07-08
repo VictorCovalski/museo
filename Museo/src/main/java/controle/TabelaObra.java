@@ -14,31 +14,26 @@ import javax.swing.table.AbstractTableModel;
 public class TabelaObra extends AbstractTableModel{
         
         //Two arrays used for the table data
-        String[] columnNames = {"Identificador","Autor", "Titulo","Coleção","País Origem", "Museu", "Data cadastro", "Data publicação"};
+        String[] columnNames = {"Identificador","Nome", "Titulo","Coleção","País Origem", "Museu", "Data cadastro", "Data publicação"};
         
-        Object[][] data;// = {
-         //   {"César Cielo", "Filho", "Brazil", "50m freestyle",1 , "21.30", false,"akak" },
-       // };
-        
+        Obra[] data; //{
+            //{"César Cielo", "Filho", "Brazil", "50m freestyle",1 , "21.30", false,"akak" }};
+        //new Object[columnNames.length][1];//
         /*
             Inicializa tabela já com resultados da busca!
         */
         public TabelaObra(Obra resultado[])
         {
-            data = new Object[resultado.length][columnNames.length];
-            int i = 0;
-            for(Obra ox : resultado)
-            {
-                data[i++] = ox.toTabela(columnNames.length);
-            }
+            data = resultado;
         }
-        public TabelaObra()
-        {
-            
-        }
+        
         @Override
         public int getRowCount()
         {
+            if (data == null)
+            {
+                return 0;
+            }
             return data.length;
         }
         
@@ -50,8 +45,44 @@ public class TabelaObra extends AbstractTableModel{
         
         @Override
         public Object getValueAt(int row, int column)
-        {        
-            return data[row][column];
+        {   
+            Obra o = data[row];
+            switch(column)
+            {
+                case 0: //identificador
+                {
+                    return o.getIdentificador();
+                }
+                case 1: //Autor
+                {
+                    return o.getNome();
+                }
+                case 2: //titulo
+                {
+                    return o.getTitulo();
+                }
+                case 3: //colecao
+                {
+                    return o.getColecao();
+                }
+                case 4: //pais origem
+                {
+                    return o.getPaisOrigem();
+                }
+                case 5: //Museu
+                {
+                    return o.getMuseu();
+                }
+                case 6: //datacadastro
+                {
+                    return o.getDataCadastro();
+                }
+                case 7: //datapublicacao
+                {
+                    return o.getDataPublicacao();
+                }
+            }
+            return null;
         }
         
         //Used by the JTable object to set the column names
@@ -62,10 +93,10 @@ public class TabelaObra extends AbstractTableModel{
         
         //Used by the JTable object to render different
         //functionality based on the data type
-        @Override
+        /*@Override
         public Class getColumnClass(int c) {
             return getValueAt(0, c).getClass();
-        }
+        }*/
         
        /* @Override
         public boolean isCellEditable(int row, int column)

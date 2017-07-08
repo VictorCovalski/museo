@@ -37,6 +37,7 @@ public class Pintura extends Obra{
     }
     public Pintura()
     {
+        super();
     }
     public Pintura(String nome)
     {

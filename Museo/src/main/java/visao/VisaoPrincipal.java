@@ -7,6 +7,7 @@ package visao;
 
 import javax.swing.JOptionPane;
 import controle.Principal;
+import modelo.Obra;
 
 
 
@@ -253,14 +254,17 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jButtonBuscaObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaObraActionPerformed
-        if(jTextFieldBusca.getText().equals(""))
+        
+        String query = jTextFieldBusca.getText();
+        if(query.equals(""))
         {
             ResultadoObra rb = new ResultadoObra();
             rb.setVisible(true);
         }
         else
         {
-            ResultadoObra rb = new ResultadoObra();
+            Obra o[] = control.buscaObra(query);
+            ResultadoObra rb = new ResultadoObra(o);
             rb.setVisible(true);
         }
     }//GEN-LAST:event_jButtonBuscaObraActionPerformed

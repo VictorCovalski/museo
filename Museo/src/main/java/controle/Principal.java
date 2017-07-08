@@ -14,6 +14,7 @@ import modelo.Diretor;
 import modelo.Museu;
 import modelo.Obra;
 import modelo.Pesquisador;
+import modelo.Pintura;
 import modelo.Tecnico;
 import modelo.Usuario;
 
@@ -35,7 +36,6 @@ public class Principal {
     
     private static Principal instancia;
     private Elasticsearch elastic;
-    public static Obra[] resultadoBusca;
     
     private void init()
     {
@@ -300,7 +300,20 @@ public class Principal {
     public void setColecoesCadastros(ArrayList<Colecao> colecoesCadastros) {
         this.colecoesCadastros = colecoesCadastros;
     }
-    
+    public Obra[] buscaObra(String query)
+    {
+        try
+        {
+            return elastic.buscaObra(query);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        Obra o[] = new Obra[1]; //hackzinho
+        o[0] = new Pintura();
+        return o;
+    }
     public static void main(String[] args) {
         
         Principal p = getInstance();
@@ -309,7 +322,7 @@ public class Principal {
         vp.setVisible(true);
         vp.setTitle("Museo - Sistema Integrado de Museus");
         vp.setLocationRelativeTo(null); //centraliza janela
-        vp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //vp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
 }

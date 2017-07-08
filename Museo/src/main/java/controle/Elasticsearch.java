@@ -14,6 +14,7 @@ import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import modelo.*;
+import org.apache.http.util.EntityUtils;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -30,6 +31,11 @@ public class Elasticsearch {
     private JsonNodeFactory factory = JsonNodeFactory.instance;
     private ObjectMapper objectMapper;
     private RestClient restClient;
+    
+    private void criaIndexMapping()
+    {
+        
+    }
     public Elasticsearch(String host,String port)
     {
         builder = RestClient.builder(new HttpHost(host,Integer.valueOf(port),"http"));
@@ -125,7 +131,7 @@ public class Elasticsearch {
  
             queryResult = restClient.performRequest(
             "GET", //digo aqui que quero inserir
-            "/obras/", // <nome do indice> / <tipo do documento> / <indice do documento>
+            "/obras/_search", // <nome do indice> / <tipo do documento> / <indice do documento>
             Collections.<String, String>emptyMap(),
             getEntity(query_all)); //HTTP REQUEST JSON PAYLOAD
   
@@ -140,42 +146,43 @@ public class Elasticsearch {
     {
         try
         {
-            String json = objectMapper.writeValueAsString(r);
-            JsonNode root = objectMapper.readTree(json);
+            JsonNode root = objectMapper.readTree(EntityUtils.toString(r.getEntity()));
 
-                JsonNode hits = root.path("hits");
-                
-                if(hits.isArray())
+            int numeroHits = root.path("hits").path("total").asInt();
+            if(numeroHits > 0)
+            {
+                JsonNode hits = root.path("hits").path("hits");
+                Obra obras[] = new Obra[numeroHits];
+                int i=0;
+                for (JsonNode node : hits) 
                 {
-                    Obra obras[] = new Obra[hits.size()];
-                    int i=0;
-                    for (JsonNode node : hits) 
-                    {
-                        //System.out.println(node.path("nome").asText());
-                        String tipoObra = node.path("type").asText();
-
-                        switch (tipoObra) {
-                            case "Escultura":
-                                obras[i] = objectMapper.readValue(node.toString(),Escultura.class);
-                                break;
-                            case "Pintura":
-                                obras[i] = objectMapper.readValue(node.toString(),Pintura.class);
-                                break;
-                            case "Arquitetura":
-                                obras[i] = objectMapper.readValue(node.toString(),Arquitetura.class);
-                                break;
-                            default:
-                                break;
-                        }
-                        i++;
+                    System.out.println(node.path("nome").asText());
+                    String tipoObra = node.path("_type").asText();
+                    JsonNode no = node.path("_source");
+                    switch (tipoObra) {
+                        case "Escultura":
+                            obras[i] = objectMapper.readValue(no.toString(),Escultura.class);
+                            break;
+                        case "Pintura":
+                            obras[i] = objectMapper.readValue(no.toString(),Pintura.class);
+                            break;
+                        case "Arquitetura":
+                            obras[i] = objectMapper.readValue(no.toString(),Arquitetura.class);
+                            break;
+                        default:
+                            break;
                     }
-                    return obras;
+                    i++;
                 }
+                return obras;
+            }
         }
         catch(Exception e)
         {
-            throw e;
+            e.printStackTrace();
         }
-        return null;
+        Obra l[] = new Obra[1];
+        l[0] = new Pintura();
+        return l;
     }
 }

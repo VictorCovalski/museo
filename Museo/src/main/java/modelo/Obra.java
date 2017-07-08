@@ -58,7 +58,15 @@ public abstract class Obra {
     }
     public Obra()
     {
-        
+        nome = "";
+        titulo = "";
+        paisOrigem = "";
+        colecao = "";
+        dataPublicacao = "";
+        dataAquisicao = "";
+        dataCadastro ="";
+        localEstante = "";
+        museu = "";
     }
     //Construtor teste
     public Obra(String nome)
@@ -176,9 +184,10 @@ public abstract class Obra {
         this.colecao = colecao;
     }
     
-    public Object[] toTabela(int tablesize)
+    public String[] toTabela(int tablesize)
     {
-        Object o[] = new Object[tablesize];
+        String o[] = new String[tablesize];
+        System.out.println("merda");
         o[0] = this.identificador;
         o[1] = this.nome;
         o[2] = this.colecao;

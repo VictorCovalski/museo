@@ -4,16 +4,27 @@
  * and open the template in the editor.
  */
 package visao;
-import controle.Principal;
+import modelo.Obra;
+import modelo.Pintura;
 public class ResultadoObra extends javax.swing.JFrame {
 
     /**
      * Creates new form ResultadoObra
      */
+    private Obra resBuffer[] = new Obra[1];
     public ResultadoObra() {
+        resBuffer[0] = new Pintura();
         initComponents();
     }
-
+    public ResultadoObra(Obra o[])
+    {
+        resBuffer = o;
+        initComponents();
+    }
+    public void processQuery(Obra o[])
+    {
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,7 +36,7 @@ public class ResultadoObra extends javax.swing.JFrame {
 
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableObras = new javax.swing.JTable(new controle.TabelaObra(Principal.resultadoBusca));
+        jTableObras = new javax.swing.JTable(new controle.TabelaObra(resBuffer));
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -36,7 +47,6 @@ public class ResultadoObra extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTableObras.setModel(null);
         jScrollPane1.setViewportView(jTableObras);
 
         jTextField1.setText("jTextField1");
