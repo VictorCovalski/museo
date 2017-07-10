@@ -6,7 +6,6 @@
 package visao;
 
 import java.util.ArrayList;
-import javax.swing.JTextField;
 
 /**
  *
@@ -27,12 +26,12 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
         jTextFieldLinguagem.setText("");
     }
 
-    public ArrayList<String> getjTextFieldArtista() {
-        ArrayList<String> artistas = new ArrayList<String>();
-        for(int i=1;i<jComboBoxArtistas.getHeight();i++){
-            artistas.add(jComboBoxArtistas.getItemAt(i));
+    public ArrayList<String> getjTextFieldAutor() {
+        ArrayList<String> autor = new ArrayList<>();
+        for(int i=1;i<jComboBoxArtistas.getItemCount();i++){
+            autor.add(jComboBoxArtistas.getItemAt(i));
         }
-        return artistas;
+        return autor;
     }
 
     public String getjTextFieldEstilo() {

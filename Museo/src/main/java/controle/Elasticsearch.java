@@ -1,9 +1,11 @@
 package controle;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.jr.ob.JSON;
 import java.util.Collections;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -11,7 +13,8 @@ import org.apache.http.entity.StringEntity;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
-import modelo.Obra;
+import modelo.*;
+import org.apache.http.util.EntityUtils;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,18 +27,20 @@ import modelo.Obra;
  */
 public class Elasticsearch {
     
-    //private String host = "localhost";
-    //private String port = "9200";
     private RestClientBuilder builder;
     private JsonNodeFactory factory = JsonNodeFactory.instance;
     private ObjectMapper objectMapper;
-    public static boolean UPDATE = true;
-    public static boolean NO_UPDATE = false;
+    private RestClient restClient;
     
+    private void criaIndexMapping()
+    {
+        
+    }
     public Elasticsearch(String host,String port)
     {
-        builder = RestClient.builder(new HttpHost(host,Integer.valueOf(port),port));
+        builder = RestClient.builder(new HttpHost(host,Integer.valueOf(port),"http"));
         objectMapper = new ObjectMapper();
+        restClient = builder.build();
     }
        
     /*
@@ -46,6 +51,22 @@ public class Elasticsearch {
     */
     public boolean verificaObra(String identificador)
     {
+        return false;
+    }
+    public boolean deletaObra(Obra o)
+    {
+        String param = String.format("/obras/%s/%s",o.getClass().getSimpleName(),o.getIdentificador());
+       try{
+            
+            Response indexResponse = restClient.performRequest(
+            "DELETE", //HTTP METHOD
+            param // <nome do indice> / <tipo do documento> / <indice do documento>
+            );
+       }
+       catch(Exception e)
+       {
+           //e.printStackTrace();
+       }
         return true;
     }
     public boolean insereObra(Obra o,boolean atualizaRegistro)
@@ -61,17 +82,14 @@ public class Elasticsearch {
        
        
        String param = String.format("/obras/%s/%s",o.getClass().getSimpleName(),o.getIdentificador());
-       HttpEntity entity;
        try{
-            String pinturaJson = objectMapper.writeValueAsString(o); //transforma objeto em String JSON
-            entity = new StringEntity(pinturaJson,"application/json", "utf-8"); //prepara requisiçao http com payload JSON
-            RestClient restClient = builder.build();
+            String obraJson = objectMapper.writeValueAsString(o); //transforma objeto em String JSON
             
             Response indexResponse = restClient.performRequest(
             "PUT", //HTTP METHOD
             param, // <nome do indice> / <tipo do documento> / <indice do documento>
             Collections.<String, String>emptyMap(),
-            entity); //HTTP REQUEST JSON PAYLOAD
+            getEntity(obraJson)); //HTTP REQUEST JSON PAYLOAD
        }
        catch(Exception e)
        {
@@ -95,5 +113,92 @@ public class Elasticsearch {
         Obra o[] = new modelo.Pintura[1];
         
         return o;
+    }
+    
+    private HttpEntity getEntity(String json) throws Exception
+    {
+        HttpEntity a;
+        try
+        {
+            a = new StringEntity(json,"application/json", "utf-8");
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+        return a;
+    }
+    
+    public Obra[] buscaObra(String query,String filtro) throws Exception//busca em TUDO
+    {
+        Response queryResult;
+        try
+        {
+            String query_all = JSON.std //easy de compor json assim
+                        //.with(JSON.Feature.PRETTY_PRINT_OUTPUT)
+                        .composeString()
+                        .startObject()
+                          .startObjectField("query")
+                            .startObjectField("match")
+                                    .put(filtro,query).end()
+                                .end()
+                            .end()
+                        .finish();
+ 
+            queryResult = restClient.performRequest(
+            "GET", //digo aqui que quero inserir
+            "/obras/_search", // <nome do indice> / <tipo do documento> / <indice do documento>
+            Collections.<String, String>emptyMap(),
+            getEntity(query_all)); //HTTP REQUEST JSON PAYLOAD
+  
+       }
+       catch(Exception e)
+       {
+           throw e;
+       }
+       return deserializaObras(queryResult);
+    }
+    private Obra[] deserializaObras(Response r) throws Exception
+    {
+        try
+        {
+            JsonNode root = objectMapper.readTree(EntityUtils.toString(r.getEntity()));
+
+            int numeroHits = root.path("hits").path("total").asInt();
+            if(numeroHits > 0)
+            {
+                JsonNode hits = root.path("hits").path("hits");
+                Obra obras[] = new Obra[numeroHits];
+                int i=0;
+                for (JsonNode node : hits) 
+                {
+                    System.out.println(node.path("nome").asText());
+                    String tipoObra = node.path("_type").asText();
+                    JsonNode no = node.path("_source");
+                    switch (tipoObra) {
+                        case "Escultura":
+                            obras[i] = objectMapper.readValue(no.toString(),Escultura.class);
+                            break;
+                        case "Pintura":
+                            obras[i] = objectMapper.readValue(no.toString(),Pintura.class);
+                            break;
+                        case "Arquitetura":
+                            obras[i] = objectMapper.readValue(no.toString(),Arquitetura.class);
+                            break;
+                        default:
+                            break;
+                    }
+                    i++;
+                }
+                return obras;
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        Obra l[] = new Obra[1];
+        l[0] = new Pintura();
+        return l;
     }
 }

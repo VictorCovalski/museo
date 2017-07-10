@@ -5,9 +5,9 @@
  */
 package visao;
 
-import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import controle.Principal;
+import modelo.Obra;
 
 
 
@@ -40,13 +40,8 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        buscaParametro = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
+        jTextFieldBusca = new javax.swing.JTextField();
+        jButtonBuscaObra = new javax.swing.JButton();
         jButtonLogin = new javax.swing.JButton();
         jLabelNomeUsuario = new javax.swing.JLabel();
         jButtonLogout = new javax.swing.JButton();
@@ -76,32 +71,22 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Bem-vindo");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("Buscar");
+        jLabel2.setText("Buscar Obras");
         jLabel2.setEnabled(false);
 
-        buscaParametro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        buscaParametro.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldBusca.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jTextFieldBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscaParametroActionPerformed(evt);
+                jTextFieldBuscaActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscaObra.setText("Buscar");
+        jButtonBuscaObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonBuscaObraActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Filtro de busca");
-
-        jCheckBox1.setText("Tudo");
-
-        jCheckBox2.setText("Usuário");
-
-        jCheckBox3.setText("Obra");
-
-        jButton2.setText("Opções avançadas");
 
         jButtonLogin.setText("Autenticar");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -123,43 +108,26 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buscaParametro)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(12, 12, 12)))
-                        .addGap(0, 216, Short.MAX_VALUE)))
-                .addGap(91, 91, 91))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(328, 328, 328)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2))))
-                .addContainerGap(123, Short.MAX_VALUE))
+                        .addGap(271, 271, 271)
+                        .addComponent(jButtonBuscaObra, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButtonLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
@@ -172,21 +140,13 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonLogout)
-                .addGap(8, 8, 8)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buscaParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jButton2))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jButtonBuscaObra, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -293,12 +253,21 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String busca = buscaParametro.getText();
-        Principal.currentBusca = busca;
-        ResultadoBusca rb = new ResultadoBusca();
-        rb.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonBuscaObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaObraActionPerformed
+        
+        String query = jTextFieldBusca.getText();
+        if(query.equals(""))
+        {
+            ResultadoObra rb = new ResultadoObra();
+            rb.setVisible(true);
+        }
+        else
+        {
+            Obra o[] = control.buscaObra(query,"_all");
+            ResultadoObra rb = new ResultadoObra(o);
+            rb.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonBuscaObraActionPerformed
 
     public static void uiAutentica(String nome)
     {
@@ -358,9 +327,9 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemRegColecaoActionPerformed
 
-    private void buscaParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaParametroActionPerformed
+    private void jTextFieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buscaParametroActionPerformed
+    }//GEN-LAST:event_jTextFieldBuscaActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         if(control.checaPermissaoTecnico())
@@ -410,17 +379,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField buscaParametro;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonBuscaObra;
     private javax.swing.JButton jButtonLogin;
     private static javax.swing.JButton jButtonLogout;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private static javax.swing.JLabel jLabelNomeUsuario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
@@ -437,5 +400,6 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemRegObra;
     private javax.swing.JMenuItem jMenuItemRegUsuario;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextFieldBusca;
     // End of variables declaration//GEN-END:variables
 }

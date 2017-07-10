@@ -6,6 +6,7 @@
 package modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.ArrayList;
@@ -18,20 +19,23 @@ import java.util.ArrayList;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Pintura.class, name = "Pintura"),
-    @JsonSubTypes.Type(value = Escultura.class, name = "Escultura") }
+    @JsonSubTypes.Type(value = Escultura.class, name = "Escultura"),
+    @JsonSubTypes.Type(value = Arquitetura.class, name = "Arquitetura")}
 )
+
 public abstract class Obra {
     private String nome;
     private String identificador;
-
-   
     private String titulo;
+    private String colecao;
     private String paisOrigem;
     private String procedencia;
+    private String descricao;
+    private String prateleira;
     private ArrayList<String> material;
-    private ArrayList<String> obrasRelacionadas;
     private String dataPublicacao;
     private String dataAquisicao;
+    private String dataCadastro;
     private String localEstante;
     private String localPrateleira;
     private String museu;
@@ -40,7 +44,7 @@ public abstract class Obra {
     
     
     public Obra(String nome, String titulo, String paisOrigem, String procedencia, ArrayList<String> material
-            , ArrayList<String> obrasRelacionadas, String dataPublicacao, String dataAquisicao, String localEstante
+            , String dataPublicacao, String dataAquisicao, String localEstante
             , String localPrateleira, int localNumero){
         
         this.nome = nome;
@@ -48,7 +52,6 @@ public abstract class Obra {
         this.paisOrigem = paisOrigem;
         this.procedencia = procedencia;
         this.material = material;
-        this.obrasRelacionadas = obrasRelacionadas;
         this.dataPublicacao = dataPublicacao;
         this.dataAquisicao = dataAquisicao;
         this.localEstante = localEstante;
@@ -58,7 +61,15 @@ public abstract class Obra {
     }
     public Obra()
     {
-        
+        nome = "";
+        titulo = "";
+        paisOrigem = "";
+        colecao = "";
+        dataPublicacao = "";
+        dataAquisicao = "";
+        dataCadastro ="";
+        localEstante = "";
+        museu = "";
     }
     //Construtor teste
     public Obra(String nome)
@@ -69,6 +80,14 @@ public abstract class Obra {
         return identificador;
     }
 
+    public String getPrateleira() {
+        return prateleira;
+    }
+
+    public void setPrateleira(String prateleira) {
+        this.prateleira = prateleira;
+    }
+     
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
@@ -84,6 +103,22 @@ public abstract class Obra {
         return titulo;
     }
 
+    public String getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -110,14 +145,6 @@ public abstract class Obra {
 
     public void setMaterial(ArrayList<String> material) {
         this.material = material;
-    }
-
-    public ArrayList<String> getObrasRelacionadas() {
-        return obrasRelacionadas;
-    }
-
-    public void setObrasRelacionadas(ArrayList<String> obrasRelacionadas) {
-        this.obrasRelacionadas = obrasRelacionadas;
     }
 
     public String getDataPublicacao() {
@@ -167,7 +194,28 @@ public abstract class Obra {
     public void setMuseu(String museu) {
         this.museu = museu;
     }
+
+    public String getColecao() {
+        return colecao;
+    }
+
+    public void setColecao(String colecao) {
+        this.colecao = colecao;
+    }
     
-    
+    public String[] toTabela(int tablesize)
+    {
+        String o[] = new String[tablesize];
+        System.out.println("merda");
+        o[0] = this.identificador;
+        o[1] = this.nome;
+        o[2] = this.colecao;
+        o[3] = this.paisOrigem;
+        o[4] = this.museu;
+        o[5] = this.dataCadastro;
+        o[6] = this.dataPublicacao;
+        
+        return o;
+    }
     
 }
