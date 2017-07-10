@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controle;
+import java.util.ArrayList;
 import modelo.Obra;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,14 +17,22 @@ public class TabelaObra extends AbstractTableModel{
         //Two arrays used for the table data
         String[] columnNames = {"Identificador","Nome", "Titulo","Coleção","País Origem", "Museu", "Data cadastro", "Data publicação"};
         
-        Obra[] data; //{
+        ArrayList<Obra> data; //{
             //{"César Cielo", "Filho", "Brazil", "50m freestyle",1 , "21.30", false,"akak" }};
         //new Object[columnNames.length][1];//
         /*
             Inicializa tabela já com resultados da busca!
         */
-        public TabelaObra(Obra resultado[])
+        public TabelaObra(ArrayList<Obra> resultado)
         {
+            data = resultado;
+        }
+
+        public Obra getDataByIndex(int i) {
+            return data.get(i);
+        }
+
+        public void setData(ArrayList<Obra> resultado) {
             data = resultado;
         }
         
@@ -34,7 +43,7 @@ public class TabelaObra extends AbstractTableModel{
             {
                 return 0;
             }
-            return data.length;
+            return data.size();
         }
         
         @Override
@@ -46,7 +55,7 @@ public class TabelaObra extends AbstractTableModel{
         @Override
         public Object getValueAt(int row, int column)
         {   
-            Obra o = data[row];
+            Obra o = data.get(row);
             switch(column)
             {
                 case 0: //identificador
@@ -91,6 +100,10 @@ public class TabelaObra extends AbstractTableModel{
             return columnNames[column];
         }
         
+        public void deleteRow(int row)
+        {
+            data.remove(row);
+        }
         //Used by the JTable object to render different
         //functionality based on the data type
         /*@Override

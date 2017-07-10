@@ -300,11 +300,11 @@ public class Principal {
     public void setColecoesCadastros(ArrayList<Colecao> colecoesCadastros) {
         this.colecoesCadastros = colecoesCadastros;
     }
-    public Obra[] buscaObra(String query)
+    public Obra[] buscaObra(String query,String filtro)
     {
         try
         {
-            return elastic.buscaObra(query);
+            return elastic.buscaObra(query,filtro);
         }
         catch (Exception e)
         {
@@ -313,6 +313,10 @@ public class Principal {
         Obra o[] = new Obra[1]; //hackzinho
         o[0] = new Pintura();
         return o;
+    }
+    public boolean deletaObra(Obra o)
+    {
+        return elastic.deletaObra(o);
     }
     public static void main(String[] args) {
         

@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package visao;
+import controle.Principal;
+import controle.TabelaObra;
+import java.util.ArrayList;
+import javax.swing.ButtonGroup;
 import modelo.Obra;
 import modelo.Pintura;
 public class ResultadoObra extends javax.swing.JFrame {
@@ -11,19 +15,38 @@ public class ResultadoObra extends javax.swing.JFrame {
     /**
      * Creates new form ResultadoObra
      */
-    private Obra resBuffer[] = new Obra[1];
+    private ArrayList<Obra> resBuffer;
+    private ButtonGroup g;
+    private TabelaObra tabela;
+    private void initRadioButton()
+    {
+        g = new ButtonGroup();
+        jRadioButtonAutor.setActionCommand("autor");
+        jRadioButtonNenhum.setActionCommand("_all");
+        jRadioButtonNome.setActionCommand("nome");
+        jRadioButtonTitulo.setActionCommand("titulo");
+        jRadioButtonIdentificador.setActionCommand("identificador");
+        g.add(jRadioButtonNome);
+        g.add(jRadioButtonAutor);
+        g.add(jRadioButtonNenhum);
+        g.add(jRadioButtonTitulo);
+        g.add(jRadioButtonIdentificador);
+        jRadioButtonNenhum.setSelected(true);
+    }
     public ResultadoObra() {
-        resBuffer[0] = new Pintura();
+        resBuffer = new ArrayList<Obra>();
+        tabela = new TabelaObra(resBuffer);
         initComponents();
+        initRadioButton();
     }
     public ResultadoObra(Obra o[])
     {
-        resBuffer = o;
+        for (int i = 0; i < o.length; i++) {
+            resBuffer.add(o[i]);
+        }
+        tabela = new TabelaObra(resBuffer);
         initComponents();
-    }
-    public void processQuery(Obra o[])
-    {
-        
+        initRadioButton();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,12 +59,18 @@ public class ResultadoObra extends javax.swing.JFrame {
 
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableObras = new javax.swing.JTable(new controle.TabelaObra(resBuffer));
-        jTextField1 = new javax.swing.JTextField();
+        jTableObras = new javax.swing.JTable(tabela);
+        jTextFieldBusca = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonEdita = new javax.swing.JButton();
+        jButtonRemove = new javax.swing.JButton();
+        jRadioButtonNome = new javax.swing.JRadioButton();
+        jRadioButtonAutor = new javax.swing.JRadioButton();
+        jRadioButtonTitulo = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jRadioButtonNenhum = new javax.swing.JRadioButton();
+        jRadioButtonIdentificador = new javax.swing.JRadioButton();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -49,58 +78,185 @@ public class ResultadoObra extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jTableObras);
 
-        jTextField1.setText("jTextField1");
+        jLabel1.setText("Busca");
 
-        jLabel1.setText("jLabel1");
+        jButton1.setText("Busca");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
+        jButtonEdita.setText("Editar");
+        jButtonEdita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditaActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        jButtonRemove.setText("Remover");
+        jButtonRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton3");
+        jRadioButtonNome.setText("Nome");
+        jRadioButtonNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonNomeActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonAutor.setText("Autor");
+        jRadioButtonAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonAutorActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonTitulo.setText("Titulo");
+
+        jLabel2.setText("Filtrar por");
+
+        jRadioButtonNenhum.setText("Nenhum");
+
+        jRadioButtonIdentificador.setText("Identificador");
+        jRadioButtonIdentificador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonIdentificadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(175, 175, 175)
-                .addComponent(jButton1)
-                .addContainerGap(183, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(130, 130, 130)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jRadioButtonNenhum)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonIdentificador)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonNome)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonAutor)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jRadioButtonTitulo))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(280, 280, 280)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonEdita, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonRemove))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(41, 41, 41))
+                    .addComponent(jRadioButtonNenhum)
+                    .addComponent(jRadioButtonNome)
+                    .addComponent(jRadioButtonAutor)
+                    .addComponent(jRadioButtonTitulo)
+                    .addComponent(jRadioButtonIdentificador))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonEdita)
+                    .addComponent(jButtonRemove))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Principal control = Principal.getInstance();
+        String campoFiltro = g.getSelection().getActionCommand();
+        String query = jTextFieldBusca.getText();
+        Obra resultado[] = control.buscaObra(query,campoFiltro);
+        resBuffer.clear();
+        for (int i = 0; i < resultado.length; i++) {
+           resBuffer.add(resultado[i]);
+        }
+        tabela.setData(resBuffer);
+        tabela.fireTableDataChanged();
+//jTableObras.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButtonAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonAutorActionPerformed
+
+    private void jRadioButtonNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonNomeActionPerformed
+
+    private void jRadioButtonIdentificadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonIdentificadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonIdentificadorActionPerformed
+
+    private void jButtonEditaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditaActionPerformed
+       if(resBuffer.size() > 0 )
+       {
+            int row = jTableObras.getSelectedRow();
+            Obra o = tabela.getDataByIndex(row);
+            RegistrarObra ro = new RegistrarObra(o);
+            ro.setVisible(true);
+       }
+    }//GEN-LAST:event_jButtonEditaActionPerformed
+
+    private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
+ 
+        if(resBuffer.size() > 0)
+        {
+            Principal control = Principal.getInstance();
+            int row = jTableObras.getSelectedRow();
+            Obra o = tabela.getDataByIndex(row);
+            resBuffer.remove(row);
+            tabela.setData(resBuffer);
+            if(control.deletaObra(o))
+            {
+                System.out.println("success delete");
+                tabela.fireTableDataChanged();
+            }
+            else
+            {
+                System.out.println("erro delete");
+            }
+        }
+    }//GEN-LAST:event_jButtonRemoveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,12 +295,18 @@ public class ResultadoObra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonEdita;
+    private javax.swing.JButton jButtonRemove;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JRadioButton jRadioButtonAutor;
+    private javax.swing.JRadioButton jRadioButtonIdentificador;
+    private javax.swing.JRadioButton jRadioButtonNenhum;
+    private javax.swing.JRadioButton jRadioButtonNome;
+    private javax.swing.JRadioButton jRadioButtonTitulo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableObras;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldBusca;
     // End of variables declaration//GEN-END:variables
 }

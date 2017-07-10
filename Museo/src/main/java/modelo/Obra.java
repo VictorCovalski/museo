@@ -6,6 +6,7 @@
 package modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public abstract class Obra {
     private String colecao;
     private String paisOrigem;
     private String procedencia;
+    private String descricao;
+    private String prateleira;
     private ArrayList<String> material;
     private String dataPublicacao;
     private String dataAquisicao;
@@ -77,6 +80,14 @@ public abstract class Obra {
         return identificador;
     }
 
+    public String getPrateleira() {
+        return prateleira;
+    }
+
+    public void setPrateleira(String prateleira) {
+        this.prateleira = prateleira;
+    }
+     
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
@@ -100,6 +111,14 @@ public abstract class Obra {
         this.dataCadastro = dataCadastro;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }

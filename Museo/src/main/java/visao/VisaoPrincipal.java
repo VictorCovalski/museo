@@ -263,7 +263,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         }
         else
         {
-            Obra o[] = control.buscaObra(query);
+            Obra o[] = control.buscaObra(query,"_all");
             ResultadoObra rb = new ResultadoObra(o);
             rb.setVisible(true);
         }

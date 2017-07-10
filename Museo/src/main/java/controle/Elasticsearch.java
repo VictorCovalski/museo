@@ -53,6 +53,22 @@ public class Elasticsearch {
     {
         return false;
     }
+    public boolean deletaObra(Obra o)
+    {
+        String param = String.format("/obras/%s/%s",o.getClass().getSimpleName(),o.getIdentificador());
+       try{
+            
+            Response indexResponse = restClient.performRequest(
+            "DELETE", //HTTP METHOD
+            param // <nome do indice> / <tipo do documento> / <indice do documento>
+            );
+       }
+       catch(Exception e)
+       {
+           //e.printStackTrace();
+       }
+        return true;
+    }
     public boolean insereObra(Obra o,boolean atualizaRegistro)
     {
         if(!atualizaRegistro)
@@ -113,7 +129,7 @@ public class Elasticsearch {
         return a;
     }
     
-    public Obra[] buscaObra(String query) throws Exception//busca em TUDO
+    public Obra[] buscaObra(String query,String filtro) throws Exception//busca em TUDO
     {
         Response queryResult;
         try
@@ -124,7 +140,7 @@ public class Elasticsearch {
                         .startObject()
                           .startObjectField("query")
                             .startObjectField("match")
-                                    .put("_all",query).end()
+                                    .put(filtro,query).end()
                                 .end()
                             .end()
                         .finish();
