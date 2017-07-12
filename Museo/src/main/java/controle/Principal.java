@@ -49,6 +49,7 @@ public class Principal {
     private Principal()
     {
         init();
+        /**
         museusCadastrados.add(new Museu("Museu A"));
         museusCadastrados.add(new Museu("Museu B"));
         String m[] = {"Museu A"};
@@ -58,7 +59,8 @@ public class Principal {
         Usuario coordenador = new modelo.Coordenador("Usuario Coordenador", "222.222.222-22", "coordenador@ufpel.edu.br","2",m1);
         usuariosCadastrados.add(dirTeste);
         usuariosCadastrados.add(pesqTeste);
-        usuariosCadastrados.add(coordenador);                                 
+        usuariosCadastrados.add(coordenador);
+        **/
     }
     public static Principal getInstance()
     {
@@ -208,7 +210,7 @@ public class Principal {
         @return true - se a autenticação ocorreu com sucesso
         
     */
-    public boolean autenticaUsuario(String cpf,String senha)
+    public boolean autenticaUsuario(String cpf,String senha) throws Exception
     {
         for(Usuario user : usuariosCadastrados)
         {
@@ -217,6 +219,17 @@ public class Principal {
                 usuarioAutenticado = user;
                 return true;
             }
+        }
+        
+        //Não achou nas configs local vai procurar no Banco de Dados
+        ConexaoSQL conn = new ConexaoSQL("localhost", "museo");
+        
+
+        int userStatus = conn.autenticaUsuario(cpf, senha);
+        if(userStatus != -1)
+        {            
+            usuarioAutenticado = conn.getCurrentUser();
+            return true;
         }
         return false;
     }
@@ -318,7 +331,7 @@ public class Principal {
     {
         return elastic.deletaObra(o);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
         Principal p = getInstance();
         p.autenticaUsuario("111.111.111-11","1");
