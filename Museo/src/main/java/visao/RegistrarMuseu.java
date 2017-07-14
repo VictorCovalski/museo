@@ -253,7 +253,7 @@ public class RegistrarMuseu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String nome = jName.getText();
         String endereco = jEndereco.getText();
-        String data = jEndereco.getText();
+        String data = jData.getText();
         String fun1 = jAbertura.getText();
         String fun2 = jFechamento.getText();
         String site = jSite.getText();
@@ -263,6 +263,15 @@ public class RegistrarMuseu extends javax.swing.JFrame {
         String descricao = jDescricao.getText();
         
         control.registraMuseu(nome, data, endereco, cidade, estado, fun1, fun2, site, telefone, descricao);
+        
+        modelo.Museu novo = new modelo.Museu(nome, data, endereco, cidade, estado, fun1, fun2, site, telefone, descricao);
+        try{
+            control.saveMuseuToDB(novo);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
         
         this.dispose();
         

@@ -103,18 +103,25 @@ public class SelecaoUsuario extends javax.swing.JFrame {
         String inputCpf = jFormattedTextFieldCPF.getText();
         String inputPassword = String.valueOf(pass);
         
-        if(control.autenticaUsuario(inputCpf,inputPassword))
-        {
-            VisaoPrincipal.uiAutentica(control.getNomeUsuarioAutenticado());
-            this.dispose();
-            return;
+        try{
+            
+            if(control.autenticaUsuario(inputCpf,inputPassword))
+            {
+                VisaoPrincipal.uiAutentica(control.getNomeUsuarioAutenticado());
+                this.dispose();
+                return;
+            }
+            else
+            {
+               //Mensagem de erro de autenticação
+                JOptionPane.showMessageDialog(this,"Nome de usuario ou senha incorretos!","Erro de autenticação",JOptionPane.ERROR_MESSAGE);
+                jPasswordField1.setText(""); //limpa campo senha
+            }
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
-        else
-        {
-           //Mensagem de erro de autenticação
-            JOptionPane.showMessageDialog(this,"Nome de usuario ou senha incorretos!","Erro de autenticação",JOptionPane.ERROR_MESSAGE);
-            jPasswordField1.setText(""); //limpa campo senha
-        }
+        
     
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 

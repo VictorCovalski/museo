@@ -36,6 +36,7 @@ public class Principal {
     
     private static Principal instancia;
     private Elasticsearch elastic;
+    private ConexaoSQL conn = new ConexaoSQL("localhost", "museo");
     
     private void init()
     {
@@ -222,9 +223,6 @@ public class Principal {
         }
         
         //Não achou nas configs local vai procurar no Banco de Dados
-        ConexaoSQL conn = new ConexaoSQL("localhost", "museo");
-        
-
         int userStatus = conn.autenticaUsuario(cpf, senha);
         if(userStatus != -1)
         {            
@@ -330,6 +328,10 @@ public class Principal {
     public boolean deletaObra(Obra o)
     {
         return elastic.deletaObra(o);
+    }
+    public void saveMuseuToDB(Museu m) throws Exception
+    {
+        conn.registraMuseu(m);
     }
     public static void main(String[] args) throws Exception {
         

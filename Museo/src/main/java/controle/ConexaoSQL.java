@@ -9,6 +9,7 @@ package controle;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 /**
@@ -37,7 +38,21 @@ public class ConexaoSQL {
         Connection connection = DriverManager.getConnection(url, username, password);
         return connection;
     }
-    
+    public void registraMuseu(modelo.Museu m) throws Exception{
+        Connection conn = connect();
+        String query = "insert into museu (nome, site, data, telefone, horaAberto, horaFechado) values (?, ?, ?, ?, ?, ?)";
+        PreparedStatement psmt = conn.prepareStatement(query);            
+        psmt.setString(1, m.getNome());
+        psmt.setString(2, m.getSite());
+        psmt.setString(3, m.getData());
+        psmt.setString(4, m.getTelefone());
+        psmt.setString(5, m.getHorarioAbertura());
+        psmt.setString(6, m.getHorarioFechamento());
+        
+        psmt.execute();
+        conn.close();
+
+    }
     public int autenticaUsuario(String cpf, String senha) throws Exception
     {
         Connection conn = connect();
@@ -56,7 +71,7 @@ public class ConexaoSQL {
                 return -1;
             }
             String m[] = {""};
-            tipo = rs.getInt("tipo");            
+            tipo = rs.getInt("tipo");    
             //Cria o usuario de acordo com o tipo            
             if(tipo == 3)
             {                
@@ -87,7 +102,13 @@ public class ConexaoSQL {
     {
          System.out.println("Buscando os museus do usuario...");
         Statement stmt = conn.createStatement();  
-        String query = "select distinct nome from museu join usuario_museu where cpfUsuario='" + cpf + "';";
+        String query = "select museu.nome\n" +
+                        "from museu\n" +
+                        "join usuario_museu\n" +
+                        "on usuario_museu.idMuseu = museu.id\n" +
+                        "join usuario\n" +
+                        "on usuario.cpf = usuario_museu.cpfUsuario\n" +
+                        "where usuario.cpf = '" + cpf + "'";
         ResultSet rs ;
         ResultSetMetaData rsmd;
         rs = stmt.executeQuery(query);       
