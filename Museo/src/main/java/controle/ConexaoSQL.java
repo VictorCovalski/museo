@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
 package controle;
+
+
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -88,12 +87,10 @@ public class ConexaoSQL {
     {
          System.out.println("Buscando os museus do usuario...");
         Statement stmt = conn.createStatement();  
-        String query = "select idMuseu from usuario_museu where cpfUsuario='" + cpf + "'";
+        String query = "select distinct nome from museu join usuario_museu where cpfUsuario='" + cpf + "';";
         ResultSet rs ;
         ResultSetMetaData rsmd;
-        rs = stmt.executeQuery(query);
-        
-        
+        rs = stmt.executeQuery(query);       
         
         //Caso o usuario nao tenha nenhum museu autorizado
         if(rs.next() == false)
@@ -111,36 +108,15 @@ public class ConexaoSQL {
         System.out.println("QUantidade deve ser 2: " + results);
         rs.beforeFirst();
         
-         System.out.println("-- Pegando os museus por nome...");
-        //Pega a lista de museus pelo nome
-        rsmd = rs.getMetaData();
-        int[] idsMuseus = new int[results];
-        int j = 0;
-        rs.beforeFirst();
+        String[] museus = new String[results];
+        
+        int i = 0;
         while(rs.next())
         {
-            idsMuseus[j] = rs.getInt("idMuseu");
-            System.out.println(idsMuseus[j]);
-            j++;
-        }
-        String[] museus = new String[results];
-        int i = 0;
-        for(int x = 0 ; x < idsMuseus.length; x++)
-        {
-            query = "select nome from museu where id=" + idsMuseus[x] + ";";            
-            rs = stmt.executeQuery(query);
-            rsmd = rs.getMetaData();
-            
-            while(rs.next())
-            {
-                museus[i] = rs.getString("nome");
-                System.out.println("Museu desse usuario: " + museus[i]);
-                i++;
-            } 
-            
+            museus[i] = rs.getString("nome");
+            i++;
         }
         
-              
         return museus;        
         
         
