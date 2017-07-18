@@ -227,6 +227,8 @@ public class Principal {
         if(userStatus != -1)
         {            
             usuarioAutenticado = conn.getCurrentUser();
+            //loadMuseus
+            loadColecoes();
             return true;
         }
         return false;
@@ -333,6 +335,14 @@ public class Principal {
     {
         conn.registraMuseu(m);
     }
+    public void saveColecaoToDB(Colecao c) throws Exception
+    {
+        conn.registraColecao(c);
+    }
+    public void loadColecoes() throws Exception
+    {
+        conn.getColecoes(colecoesCadastros);
+    }
     public static void main(String[] args) throws Exception {
         
         Principal p = getInstance();
@@ -341,6 +351,7 @@ public class Principal {
         vp.setVisible(true);
         vp.setTitle("Museo - Sistema Integrado de Museus");
         vp.setLocationRelativeTo(null); //centraliza janela
+        
         //vp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     

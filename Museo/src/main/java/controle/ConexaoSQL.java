@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 /**
  *
  * @author Gui
@@ -38,7 +39,8 @@ public class ConexaoSQL {
         Connection connection = DriverManager.getConnection(url, username, password);
         return connection;
     }
-    public void registraMuseu(modelo.Museu m) throws Exception{
+    public void registraMuseu(modelo.Museu m) throws Exception
+    {
         Connection conn = connect();
         String query = "insert into museu (nome, site, data, telefone, horaAberto, horaFechado) values (?, ?, ?, ?, ?, ?)";
         PreparedStatement psmt = conn.prepareStatement(query);            
@@ -52,6 +54,35 @@ public class ConexaoSQL {
         psmt.execute();
         conn.close();
 
+    }
+    public void registraColecao(modelo.Colecao c) throws Exception
+    {
+        Connection conn = connect();
+        String query = "insert into colecao (idMuseu, nome, descricao, data) values (?, ?, ?, ?);";
+        PreparedStatement psmt = conn.prepareStatement(query);
+        
+        
+        //Pegar o id do museu
+        int mId = getMuseuIdByName(c.getMuseu(), conn);
+        psmt.setInt(1, mId);
+        psmt.setString(2, c.getNome());
+        psmt.setString(3, c.getDescricao());
+        psmt.setString(4, c.getData());
+        
+        psmt.execute();
+        conn.close();
+    }
+    public int getMuseuIdByName(String name, Connection conn) throws Exception
+    {
+        String query = "select id from museu where nome = '" + name + "';";
+         Statement stmt = conn.createStatement();
+         ResultSet rs;
+         rs = stmt.executeQuery(query);
+         int result = -1;
+         if(rs.next() != false){
+             result = rs.getInt("id");
+         }
+        return result;
     }
     public int autenticaUsuario(String cpf, String senha) throws Exception
     {
@@ -97,6 +128,32 @@ public class ConexaoSQL {
     }
     public modelo.Usuario getCurrentUser(){
         return currentUser;
+    }
+    public void getColecoes(ArrayList destino) throws Exception{
+        Connection conn = connect();
+        Statement stmt = conn.createStatement();   
+        String query = "select * from colecao";
+        ResultSet rs;
+        rs = stmt.executeQuery(query);
+        
+        while(rs.next()){
+            
+            modelo.Colecao novaCol = new modelo.Colecao(rs.getString("nome"), rs.getString("data"), getMuseuNameById(rs.getInt("idMuseu")), rs.getString("descricao"));
+            destino.add(novaCol);
+        }
+    }
+    public String getMuseuNameById(int id) throws Exception{
+        
+        Connection temp = connect();
+        Statement stmt = temp.createStatement();  
+        String query = "select nome from museu where id='" + id + "'";
+        ResultSet rs;
+        rs = stmt.executeQuery(query);
+        String result = "Null";
+        if(rs.next()!=false){
+            result = rs.getString("nome");
+        }
+        return result;
     }
     public String[] getUsuarioMuseus(String cpf, Connection conn) throws Exception
     {

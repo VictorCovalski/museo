@@ -186,6 +186,15 @@ public class RegistrarColecao extends javax.swing.JFrame {
         
         control.registraColecao(nome, data, museu, descricao);
         
+        modelo.Colecao nova  = new modelo.Colecao(nome, data, museu, descricao);
+        try{
+            control.saveColecaoToDB(nova);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
