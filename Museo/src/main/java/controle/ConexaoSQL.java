@@ -104,8 +104,7 @@ public class ConexaoSQL {
             String m[] = {""};
             tipo = rs.getInt("tipo");    
             //Cria o usuario de acordo com o tipo            
-            if(tipo == 3)
-            {                
+            if(tipo == 3){                
                 currentUser = new modelo.Coordenador(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"), m);
             }else if(tipo == 2)
             {
@@ -129,6 +128,44 @@ public class ConexaoSQL {
     public modelo.Usuario getCurrentUser(){
         return currentUser;
     }
+    public void getUsuarios(ArrayList destino) throws Exception{
+        Connection conn = connect();
+        Statement stmt = conn.createStatement();
+        String query = "select * from usuario";
+        ResultSet rs;
+        rs = stmt.executeQuery(query);
+        modelo.Usuario user = null;
+        
+        while(rs.next()){
+            
+            int tipo = rs.getInt("tipo");
+            
+            String m[] = {""};
+            
+            switch (tipo) {
+                case 0:
+                    user = new modelo.Pesquisador(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"), m);
+                    break;
+                case 1:
+                    user = new modelo.Tecnico(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"), m);
+                    break;
+                case 2:
+                    user = new modelo.Diretor(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"), m);
+                    break;
+                case 3:
+                     user = new modelo.Coordenador(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"), m);
+                    break;
+                default:
+                    break;
+            }
+            
+            destino.add(user);
+            
+           
+        }
+        
+        conn.close();
+    }
     public void getMuseus(ArrayList destino) throws Exception{
         Connection conn = connect();
         Statement stmt = conn.createStatement();
@@ -141,6 +178,8 @@ public class ConexaoSQL {
             modelo.Museu novoMus = new modelo.Museu(rs.getString("nome"), rs.getString("data"), rs.getString("endereco"), rs.getString("cidade"), rs.getString("estado"), rs.getString("horaAberto"), rs.getString("horaFechado"), rs.getString("site"), rs.getString("telefone"), rs.getString("descricao"));
             destino.add(novoMus);
         }
+        
+        conn.close();
     }
     public void getColecoes(ArrayList destino) throws Exception{
         Connection conn = connect();
@@ -154,6 +193,8 @@ public class ConexaoSQL {
             modelo.Colecao novaCol = new modelo.Colecao(rs.getString("nome"), rs.getString("data"), getMuseuNameById(rs.getInt("idMuseu")), rs.getString("descricao"));
             destino.add(novaCol);
         }
+        
+         conn.close();
     }
     public String getMuseuNameById(int id) throws Exception{
         

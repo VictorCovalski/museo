@@ -230,6 +230,7 @@ public class Principal {
             
             loadMuseus();
             loadColecoes();
+            loadUsuarios();
             return true;
         }
         return false;
@@ -350,6 +351,9 @@ public class Principal {
         //        for(int i = 0; i < museusCadastrados.size(); i ++){
         //            System.out.println(museusCadastrados.get(i).getNome());
         //        }
+    }
+    public void loadUsuarios() throws Exception{
+        conn.getUsuarios(usuariosCadastrados);
     }
     public static void main(String[] args) throws Exception {
         
