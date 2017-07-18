@@ -26,6 +26,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     
     javax.swing.DefaultListModel<String> listModel = new DefaultListModel<>();
     Principal control;
+    boolean editando = false;
+    String currentCpf = "";
     public RegistrarUsuario() {
         control = Principal.getInstance();
         initComponents();
@@ -34,6 +36,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     
     public boolean EditarUsuario(String cpf)
     {
+        editando = true;
+        currentCpf = cpf;
         jFormattedTextFieldCPF.setText(cpf);
         modelo.Usuario u = control.getUsuario(cpf);
         if(u != null)
@@ -329,8 +333,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, Short.MAX_VALUE))
         );
 
         pack();
@@ -365,7 +368,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         }
         String nome = jTextFieldNome.getText();
         String cpf = jFormattedTextFieldCPF.getText();
-        if(control.checaCpfCadastro(cpf))//verifica se o cpf ja consta no cadastro
+        if(control.checaCpfCadastro(cpf) && !editando)//verifica se o cpf ja consta no cadastro
         {
             JOptionPane.showMessageDialog(this,"CPF ja consta em cadastro!","Erro no cadastro",JOptionPane.ERROR_MESSAGE);
             return;
@@ -381,22 +384,30 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             return;
         }
         
-        if(opt.equals("Pesquisador"))
-        {
-            control.registraPesquisador(nome, cpf,email, senha, museusSelecionados);
+        if(!editando){
+
+            if(opt.equals("Pesquisador"))
+            {
+                control.registraPesquisador(nome, cpf,email, senha, museusSelecionados);
+            }
+            else if(opt.equals("Tecnico"))
+            {
+                control.registraTecnico(nome, cpf,email,senha, museusSelecionados);
+            }
+            else if(opt.equals("Diretor"))
+            {
+                control.registraDiretor(nome, cpf,email,senha, museusSelecionados);
+            }
+            else if(opt.equals("Coordenador"))
+            {
+               control.registraCoordenador(nome,cpf,email,senha, museusSelecionados);
+            }
+            
+        }else{
+            control.atualizaUsuario(nome, cpf, email, senha, museusSelecionados, opt, currentCpf);
         }
-        else if(opt.equals("Tecnico"))
-        {
-            control.registraTecnico(nome, cpf,email,senha, museusSelecionados);
-        }
-        else if(opt.equals("Diretor"))
-        {
-            control.registraDiretor(nome, cpf,email,senha, museusSelecionados);
-        }
-        else if(opt.equals("Coordenador"))
-        {
-           control.registraCoordenador(nome,cpf,email,senha, museusSelecionados);
-        }
+        
+        
 
         jLabelRegStatus.setText(opt + " " + jTextFieldNome.getText() + " cadastrado com sucesso.");
         jTextFieldNome.setText("");

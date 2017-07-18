@@ -90,6 +90,20 @@ public class Principal {
         colecoesCadastros.add(new Colecao(nome, data, museu, descricao));
                 
     }
+    public void atualizaUsuario(String nome, String cpf, String email, String senha, String museusSelecionados[], String opt, String oldCpf){
+        
+        //Encontrar o usuario
+        String classname = "modelo.".concat(opt);
+        Usuario atualizado = getUsuario(oldCpf);
+        atualizado.setNome(nome);
+        atualizado.setEmail(email);
+        atualizado.setCpf(cpf);
+        atualizado.setSenha(senha);
+        atualizado.setMuseusPermitidos(museusSelecionados);
+        
+        System.out.println("Usuario atualizado");
+
+    }
     public void registraPesquisador(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {
         usuariosCadastrados.add(new Pesquisador(nome,cpf,email,senha,museusSelecionados));
