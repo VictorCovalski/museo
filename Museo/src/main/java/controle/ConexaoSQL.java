@@ -129,6 +129,19 @@ public class ConexaoSQL {
     public modelo.Usuario getCurrentUser(){
         return currentUser;
     }
+    public void getMuseus(ArrayList destino) throws Exception{
+        Connection conn = connect();
+        Statement stmt = conn.createStatement();
+        String query = "select * from museu";
+        ResultSet rs;
+        rs = stmt.executeQuery(query);
+        
+        while(rs.next()){
+            
+            modelo.Museu novoMus = new modelo.Museu(rs.getString("nome"), rs.getString("data"), rs.getString("endereco"), rs.getString("cidade"), rs.getString("estado"), rs.getString("horaAberto"), rs.getString("horaFechado"), rs.getString("site"), rs.getString("telefone"), rs.getString("descricao"));
+            destino.add(novoMus);
+        }
+    }
     public void getColecoes(ArrayList destino) throws Exception{
         Connection conn = connect();
         Statement stmt = conn.createStatement();   

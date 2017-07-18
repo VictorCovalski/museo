@@ -48,7 +48,7 @@ public class ListarUsuarios extends javax.swing.JFrame {
         jButtonEditar = new javax.swing.JButton();
         jFormattedTextFieldPesq = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane1.setViewportView(jList1);
 

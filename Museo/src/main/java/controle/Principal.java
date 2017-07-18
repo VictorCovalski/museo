@@ -227,7 +227,8 @@ public class Principal {
         if(userStatus != -1)
         {            
             usuarioAutenticado = conn.getCurrentUser();
-            //loadMuseus
+            
+            loadMuseus();
             loadColecoes();
             return true;
         }
@@ -342,6 +343,13 @@ public class Principal {
     public void loadColecoes() throws Exception
     {
         conn.getColecoes(colecoesCadastros);
+    }
+    public void loadMuseus() throws Exception{
+        conn.getMuseus(museusCadastrados);        
+        
+        //        for(int i = 0; i < museusCadastrados.size(); i ++){
+        //            System.out.println(museusCadastrados.get(i).getNome());
+        //        }
     }
     public static void main(String[] args) throws Exception {
         
