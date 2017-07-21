@@ -345,10 +345,10 @@ public class RegistrarUsuario extends javax.swing.JFrame {
 
     public String[] getListaMuseus()
     {
-        String museus[] = new String[listModel.size()];
-        
-        for (int i = 0; i < this.listModel.size(); i++) {
-            museus[i] = listModel.getElementAt(i);
+        String museus[] = new String[jList2.getModel().getSize()-1];
+        for(int i = 1; i < jList2.getModel().getSize(); i++){
+            museus[i-1] = jList2.getModel().getElementAt(i);
+            System.out.println("MUSEU: " + museus[i-1]);
         }
         return museus;
     }
@@ -404,7 +404,13 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             }
             
         }else{
-            control.atualizaUsuario(nome, cpf, email, senha, museusSelecionados, opt, currentCpf);
+            try{
+                control.atualizaUsuario(nome, cpf, email, senha, museusSelecionados, opt, currentCpf);
+            }
+            catch(Exception e)
+            {
+                System.out.println("--> Exception on:" + e.getMessage());
+            }
         }
         
         

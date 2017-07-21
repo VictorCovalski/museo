@@ -39,6 +39,82 @@ public class ConexaoSQL {
         Connection connection = DriverManager.getConnection(url, username, password);
         return connection;
     }
+    public void atualizaUsuario(modelo.Usuario atualizado, String opt) throws Exception{
+        System.out.println("Atualizando usuario no Banco de Dados...");
+        
+        Connection conn = connect();
+        String query = "update usuario set cpf = ?, nome = ?, email = ?, senha = ?, tipo = ? where cpf='" + atualizado.getCpf() +"';";
+        PreparedStatement psmt = conn.prepareStatement(query);        
+        
+        int tipo = 0;        
+        if(opt.equals("Pesquisador")){
+            tipo = 0;
+        }else if(opt.equals("Tecnico")){
+            tipo = 1;
+        }else if(opt.equals("Diretor")){
+            tipo = 2;
+        }else{
+            tipo = 3;
+        }
+        
+        psmt.setString(1, atualizado.getCpf());
+        psmt.setString(2, atualizado.getNome());
+        psmt.setString(3, atualizado.getEmail());
+        psmt.setString(4, atualizado.getSenha());
+        psmt.setInt(5, tipo);
+        
+        psmt.execute();
+        conn.close();       
+        
+        atualizaPermissoes(atualizado.getMuseusPermitidos(), atualizado.getCpf());
+        
+        
+        
+    }
+    public void atualizaPermissoes(String m[], String cpf) throws Exception{
+        Connection conn = connect();
+        String query = "delete from usuario_museu where cpfUsuario ='" + cpf + "';";
+        PreparedStatement psmt = conn.prepareStatement(query);
+        //Primeiro remove todas as permissoes atuais do BD
+        psmt.execute();
+        
+        //Pega ids dos museus para adicionar
+        Statement stmt = conn.createStatement();
+        ResultSet rs;
+        String names = new String();
+        //Escreve array com os museus para pesquisar no BD
+        for(int i = 0; i < m.length; i++){
+            names += "'" + m[i] + "'";
+            if(i < m.length-1){
+                names += ", ";
+            }
+        }
+        System.out.println("NOMES: " + names);
+        query = "select id from museu where nome in(" + names + ")";
+        rs = stmt.executeQuery(query);
+        ArrayList<Integer> idPermissoes = new ArrayList<>();
+        
+        while(rs.next()){
+            idPermissoes.add(rs.getInt("id"));
+            
+        }        
+        
+        
+        //Insere as novas permissoes
+        for(int i = 0; i< idPermissoes.size(); i++){
+            int curr_id = idPermissoes.get(i);
+            System.out.println("Inserindo id = " + curr_id);
+            query = "insert into usuario_museu (cpfUsuario, idMuseu) values (?, ?)";
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, cpf);
+            psmt.setInt(2, curr_id);
+            psmt.execute();
+        }
+        
+        
+        conn.close();
+        
+    }
     public void registraMuseu(modelo.Museu m) throws Exception
     {
         Connection conn = connect();

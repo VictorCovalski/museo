@@ -90,19 +90,28 @@ public class Principal {
         colecoesCadastros.add(new Colecao(nome, data, museu, descricao));
                 
     }
-    public void atualizaUsuario(String nome, String cpf, String email, String senha, String museusSelecionados[], String opt, String oldCpf){
-        
+    public void atualizaUsuario(String nome, String cpf, String email, String senha, String museusSelecionados[], String opt, String oldCpf) throws Exception{
+        System.out.println("Atualizando usuario no sistema...");
         //Encontrar o usuario
-        String classname = "modelo.".concat(opt);
-        Usuario atualizado = getUsuario(oldCpf);
+        Usuario atualizado = getUsuario(oldCpf); 
+        removerUsuario(oldCpf);
         atualizado.setNome(nome);
         atualizado.setEmail(email);
         atualizado.setCpf(cpf);
         atualizado.setSenha(senha);
         atualizado.setMuseusPermitidos(museusSelecionados);
         
-        System.out.println("Usuario atualizado");
-
+        
+        usuariosCadastrados.add(atualizado);
+        conn.atualizaUsuario(atualizado, opt);
+                
+    }
+    public void removerUsuario(String cpf) throws Exception{
+        for(int i = 0; i < usuariosCadastrados.size(); i++){
+            if(usuariosCadastrados.get(i).getCpf().equals(cpf)){
+                usuariosCadastrados.remove(usuariosCadastrados.get(i));
+            }
+        }
     }
     public void registraPesquisador(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {
