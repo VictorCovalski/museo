@@ -59,4 +59,9 @@ public abstract class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    public void showMuseus(){
+        for(int i = 0; i < museusPermitidos.length; i++){
+            System.out.println(museusPermitidos[i]);
+        }
+    }
 }

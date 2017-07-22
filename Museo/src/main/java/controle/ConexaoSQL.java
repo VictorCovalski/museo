@@ -71,6 +71,27 @@ public class ConexaoSQL {
         
         
     }
+    public void registraUsuario(modelo.Usuario user, int tipo) throws Exception{
+        System.out.println("Museus do usuario adicionado: ");
+        user.showMuseus();
+        
+        Connection conn = connect();
+        String query = "insert into usuario (cpf, nome, email, senha, tipo) values (?, ?, ?, ?, ?)";
+        PreparedStatement psmt = conn.prepareStatement(query);
+        
+        psmt.setString(1, user.getCpf());
+        psmt.setString(2, user.getNome());
+        psmt.setString(3, user.getEmail());
+        psmt.setString(4, user.getSenha());
+        psmt.setInt(5, tipo);
+       
+        
+        psmt.execute();
+        
+        atualizaPermissoes(user.getMuseusPermitidos(), user.getCpf());
+        conn.close();
+        
+    }
     public void atualizaPermissoes(String m[], String cpf) throws Exception{
         Connection conn = connect();
         String query = "delete from usuario_museu where cpfUsuario ='" + cpf + "';";
@@ -97,8 +118,7 @@ public class ConexaoSQL {
         while(rs.next()){
             idPermissoes.add(rs.getInt("id"));
             
-        }        
-        
+        }
         
         //Insere as novas permissoes
         for(int i = 0; i< idPermissoes.size(); i++){
@@ -179,6 +199,7 @@ public class ConexaoSQL {
             }
             String m[] = {""};
             tipo = rs.getInt("tipo");    
+            
             //Cria o usuario de acordo com o tipo            
             if(tipo == 3){                
                 currentUser = new modelo.Coordenador(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"), m);
@@ -313,7 +334,7 @@ public class ConexaoSQL {
         while(rs.next() != false){
             results++;
         }
-        System.out.println("QUantidade deve ser 2: " + results);
+        
         rs.beforeFirst();
         
         String[] museus = new String[results];

@@ -47,8 +47,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             jPasswordField1.setText(u.getSenha());
             jPasswordField2.setText(u.getSenha());
             String m[] = u.getMuseusPermitidos();
-            for (int i = 0; i < m.length; i++) {
-                listModel.addElement(m[i]);
+            for (int i = 0; i < m.length-1; i++) {
+                jList2.setListData(m);
             }
             return true;
         }
@@ -345,10 +345,11 @@ public class RegistrarUsuario extends javax.swing.JFrame {
 
     public String[] getListaMuseus()
     {
-        String museus[] = new String[jList2.getModel().getSize()-1];
-        for(int i = 1; i < jList2.getModel().getSize(); i++){
-            museus[i-1] = jList2.getModel().getElementAt(i);
-            System.out.println("MUSEU: " + museus[i-1]);
+        System.out.println("QUANTIDADE DE MUSEUS SELECIONADOS: " + jList2.getModel().getSize());
+        String museus[] = new String[jList2.getModel().getSize()];
+        for(int i = 0; i < jList2.getModel().getSize(); i++){
+            museus[i] = jList2.getModel().getElementAt(i);
+            System.out.println("MUSEU: " + museus[i]);
         }
         return museus;
     }
@@ -409,7 +410,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             }
             catch(Exception e)
             {
-                System.out.println("--> Exception on:" + e.getMessage());
+                System.out.println("--> Exception on: " + e.getMessage());
             }
         }
         

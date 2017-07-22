@@ -36,7 +36,7 @@ public class Principal {
     
     private static Principal instancia;
     private Elasticsearch elastic;
-    private ConexaoSQL conn = new ConexaoSQL("localhost", "museo");
+    private ConexaoSQL conn;
     
     private void init()
     {
@@ -45,23 +45,13 @@ public class Principal {
        usuariosCadastrados = new ArrayList<>();
        colecoesCadastros = new ArrayList<>();
        elastic = new Elasticsearch("localhost","9200");
+       conn = new ConexaoSQL("localhost", "museo");
 
     }
     private Principal()
     {
         init();
-        /**
-        museusCadastrados.add(new Museu("Museu A"));
-        museusCadastrados.add(new Museu("Museu B"));
-        String m[] = {"Museu A"};
-        String m1[] = {"Museu A","Museu B"};
-        Usuario pesqTeste = new modelo.Pesquisador("Usuario Pesquisador","000.000.000-00","pesquisador@ufpel.edu.br","0",m);
-        Usuario dirTeste = new Diretor("Usuario Diretor","111.111.111-11","diretor@ufpel.edu.br","1",m);
-        Usuario coordenador = new modelo.Coordenador("Usuario Coordenador", "222.222.222-22", "coordenador@ufpel.edu.br","2",m1);
-        usuariosCadastrados.add(dirTeste);
-        usuariosCadastrados.add(pesqTeste);
-        usuariosCadastrados.add(coordenador);
-        **/
+        
     }
     public static Principal getInstance()
     {
@@ -115,19 +105,51 @@ public class Principal {
     }
     public void registraPesquisador(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {
-        usuariosCadastrados.add(new Pesquisador(nome,cpf,email,senha,museusSelecionados));
+        Pesquisador user = new Pesquisador(nome,cpf,email,senha,museusSelecionados);
+        usuariosCadastrados.add(user);
+        try{
+            registraUsuarioDB(user, 0);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        
     }
     public void registraTecnico(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {
-        usuariosCadastrados.add(new Tecnico(nome,cpf,email,senha,museusSelecionados));
+        Tecnico user = new Tecnico(nome,cpf,email,senha,museusSelecionados);
+        usuariosCadastrados.add(user);
+        try{
+            registraUsuarioDB(user, 1);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     public void registraDiretor(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {  
-         usuariosCadastrados.add(new Diretor(nome,cpf,email,senha,museusSelecionados));
+         Diretor user = new Diretor(nome,cpf,email,senha,museusSelecionados);
+         usuariosCadastrados.add(user);
+         try{
+            registraUsuarioDB(user, 2);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     public void registraCoordenador(String nome,String cpf,String email,String senha,String museusSelecionados[])
     {
-        usuariosCadastrados.add(new Coordenador(nome,cpf,email,senha,museusSelecionados));
+        Coordenador user = new Coordenador(nome,cpf,email,senha,museusSelecionados);
+        usuariosCadastrados.add(user);
+        try{
+            registraUsuarioDB(user, 3);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public void registraUsuarioDB(Usuario user, int tipo) throws Exception{
+        conn.registraUsuario(user, tipo);
     }
     public boolean checaPermissaoTecnico()
     {
@@ -370,10 +392,6 @@ public class Principal {
     }
     public void loadMuseus() throws Exception{
         conn.getMuseus(museusCadastrados);        
-        
-        //        for(int i = 0; i < museusCadastrados.size(); i ++){
-        //            System.out.println(museusCadastrados.get(i).getNome());
-        //        }
     }
     public void loadUsuarios() throws Exception{
         conn.getUsuarios(usuariosCadastrados);
