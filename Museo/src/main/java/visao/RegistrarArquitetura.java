@@ -42,7 +42,14 @@ public class RegistrarArquitetura extends javax.swing.JPanel {
         return jTextFieldLinguagem.getText();
     }
     
-    
+    public void setFields(String linguagem, String estilo, ArrayList<String> artista)
+    {
+        jTextFieldLinguagem.setText(linguagem);
+        jTextFieldEstilo.setText(estilo);
+        for(String a : artista){
+            jComboBoxArtistas.addItem(a);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

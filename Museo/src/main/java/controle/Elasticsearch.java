@@ -29,17 +29,12 @@ public class Elasticsearch {
     
     private RestClientBuilder builder;
     private JsonNodeFactory factory = JsonNodeFactory.instance;
-    private ObjectMapper objectMapper;
+    private static ObjectMapper objectMapper = new ObjectMapper();
     private RestClient restClient;
     
-    private void criaIndexMapping()
-    {
-        
-    }
     public Elasticsearch(String host,String port)
     {
         builder = RestClient.builder(new HttpHost(host,Integer.valueOf(port),"http"));
-        objectMapper = new ObjectMapper();
         restClient = builder.build();
     }
        
@@ -114,7 +109,19 @@ public class Elasticsearch {
         
         return o;
     }
-    
+    public static JsonNode serializaObra(Obra o)
+    {
+        try{
+            String obraJson = objectMapper.writeValueAsString(o);
+            JsonNode root = objectMapper.readTree(obraJson);
+            return root;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
     private HttpEntity getEntity(String json) throws Exception
     {
         HttpEntity a;

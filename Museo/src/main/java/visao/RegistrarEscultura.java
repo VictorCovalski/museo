@@ -33,6 +33,31 @@ public class RegistrarEscultura extends javax.swing.JPanel {
         jTextFieldProfundidade.setText("");
         jTextFieldTecnica.setText("");
     }
+    
+    public void setFields(String altura, ArrayList<String> autores, String comprimento, String espessura, String forma, String largura, String maiorCirc
+            , ArrayList<String> materiais, String menorCirc, String peso, String profundidade, String tecnica)
+    {
+        jTextFieldAltura.setText(altura);
+        for(String a : materiais){
+            jComboBoxAutores.addItem(a);
+
+        }
+        
+        jTextFieldComprimento.setText(comprimento);
+        jTextFieldEspessura.setText(espessura);
+        jTextFieldForma.setText(forma);
+        jTextFieldLargura.setText(largura);
+        jTextFieldMenorCirc.setText(menorCirc);
+        jTextFieldMaiorCirc.setText(maiorCirc);
+        for(String a : materiais){
+            jComboBoxMateriais.addItem(a);
+           
+        }
+        
+        jTextFieldPeso.setText(peso);
+        jTextFieldProfundidade.setText(profundidade);
+        jTextFieldTecnica.setText(tecnica);
+    }
 
     public ArrayList<String> getjComboBoxAutores() {
         ArrayList<String> autores = new ArrayList<>();

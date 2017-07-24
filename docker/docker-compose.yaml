@@ -23,6 +23,7 @@ services:
       - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
       - http.host=0.0.0.0
       - xpack.security.enabled=false
+      - discovery.type=single-node
     networks:
       - elk-network
     volumes:
@@ -31,11 +32,11 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
-  mysql:
-    container_name: mysql-server
-    image: mysql/mysql-server:latest
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=SenhaSecreta1!
-      - MYSQL_ROOT_HOST=%
+ # mysql:
+  #  container_name: mysql-server
+   # image: mysql/mysql-server:latest
+   # ports:
+    #  - "3306:3306"
+    #environment:
+    #  - MYSQL_ROOT_PASSWORD=mypassword1
+     # - MYSQL_ROOT_HOST=%

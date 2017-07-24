@@ -35,7 +35,7 @@ public class ConexaoSQL {
         String url = "jdbc:mysql://" + server + ":3306/" + base;
 
         String username = "root";
-        String password = "";
+        String password = "root";
         Connection connection = DriverManager.getConnection(url, username, password);
         return connection;
     }

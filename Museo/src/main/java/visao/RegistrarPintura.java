@@ -6,6 +6,7 @@
 package visao;
 
 import java.util.ArrayList;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,6 +20,20 @@ public class RegistrarPintura extends javax.swing.JPanel {
     public RegistrarPintura() {
         initComponents();
        
+    }
+    public void setFields(String altura, ArrayList<String> autor, String comprimento, String estado, String largura, String peso, String tecnica)
+    {
+        jTextFieldAltura.setText(altura);
+        for(String a : autor)
+        {
+            jComboBoxAutores.addItem(a);
+        }
+        
+        jTextFieldPeso.setText(peso);
+        jTextFieldComprimento.setText(comprimento);
+        jTextFieldEstado.setText(estado);
+        jTextFieldLargura.setText(largura);
+        jTextFieldTecnica.setText(tecnica);
     }
     
     public void apagar(){

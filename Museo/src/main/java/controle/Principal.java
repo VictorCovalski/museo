@@ -50,6 +50,8 @@ public class Principal {
     }
     private Principal()
     {
+        System.setProperty("swing.aatext", "true" );
+        System.setProperty("awt.useSystemAAFontSettings","on"); 
         init();
         
     }

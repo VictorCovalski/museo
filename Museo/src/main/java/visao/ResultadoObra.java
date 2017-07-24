@@ -41,6 +41,7 @@ public class ResultadoObra extends javax.swing.JFrame {
     }
     public ResultadoObra(Obra o[])
     {
+        resBuffer = new ArrayList<Obra>();
         for (int i = 0; i < o.length; i++) {
             resBuffer.add(o[i]);
         }
@@ -74,7 +75,7 @@ public class ResultadoObra extends javax.swing.JFrame {
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane1.setViewportView(jTableObras);
 

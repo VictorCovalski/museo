@@ -5,6 +5,8 @@
  */
 package visao;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import controle.Elasticsearch;
 import controle.Principal;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -49,6 +51,8 @@ public class RegistrarObra extends javax.swing.JFrame {
     public RegistrarObra(Obra o)
     {
         this();
+        
+        
         //text field
         jTextFieldNome.setText(o.getNome());
         jTextFieldID.setText(o.getIdentificador());
@@ -75,11 +79,68 @@ public class RegistrarObra extends javax.swing.JFrame {
         {
             jComboBoxMateriais.addItem(material);
         }
-        
-        switch(classe)
+        JsonNode root = Elasticsearch.serializaObra(o);
+        switch(root.path("@type").asText())
         {
             case "Pintura":
             {
+                
+               rp.setVisible(true);
+               String altura = root.path("altura").asText();
+               String largura = root.path("largura").asText();
+               String comprimento = root.path("comprimento").asText();
+               String peso = root.path("peso").asText();
+               String tecnica = root.path("tecnica").asText();
+               String estado = root.path("estadoConservacao").asText();
+               JsonNode arrayAutores = root.get("autor");
+               ArrayList<String> autores = new ArrayList<>();
+               for(JsonNode a : arrayAutores)
+               {
+                   autores.add(a.asText());
+               }
+               rp.setFields(altura, autores, comprimento, estado, largura, peso, tecnica);
+               
+                
+            }
+            case "Arquitetura":
+            {
+                ra.setVisible(true);
+                String linguagem = root.path("linguagem").asText();
+                String estilo = root.path("estilo").asText();
+                ArrayList<String> artistas = new ArrayList<>();
+                JsonNode arrayAutores = root.get("autor");
+                for(JsonNode a : arrayAutores){
+                    artistas.add(a.asText());
+                 
+                }
+                ra.setFields(linguagem, estilo, artistas);
+            }
+            case "Escultura":
+            {
+                re.setVisible(true);
+                String altura = root.path("altura").asText();
+                ArrayList<String> autores = new ArrayList<>();
+                JsonNode arrayAutores = root.get("autor");
+                for(JsonNode a : arrayAutores){
+                    autores.add(a.asText());
+                }
+                String comprimento = root.path("comprimento").asText();
+                       
+                String espessura = root.path("espessura").asText();
+                String forma = root.path("forma").asText();
+                String largura = root.path("largura").asText();
+                String maiorCirc = root.path("circunferenciaMaior").asText();
+                
+                ArrayList<String> materiais = new ArrayList<>();
+                JsonNode arrayMateriais = root.get("materialUtilizado");
+                for(JsonNode a : arrayMateriais){
+                    materiais.add(a.asText());
+                }
+                String menorCirc = root.path("circunferenciaMenor").asText(); 
+                String peso = root.path("peso").asText();
+                String profundidade = root.path("profundidade").asText();
+                String tecnica  = root.path("tecnica").asText();
+                re.setFields(altura, autores, comprimento, espessura, forma, largura, maiorCirc, materiais, menorCirc, peso, profundidade, tecnica);
             }
         }
         
@@ -597,7 +658,7 @@ public class RegistrarObra extends javax.swing.JFrame {
             obra.setMuseu((String)jComboBoxMuseu.getSelectedItem());
             obra.setColecao((String)jComboBoxColecao.getSelectedItem());
             obra.setDescricao(jTextAreaDesc.getText());
-            
+            obra.setPrateleira(localPrateleira);
             if(control.registraObra(obra,jCheckBoxOverwrite.isSelected()))
             {
                 JOptionPane.showMessageDialog(null, "Registrado com sucesso");
