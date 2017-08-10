@@ -10,6 +10,10 @@ import controle.Elasticsearch;
 import controle.Principal;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.Socket;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +21,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
@@ -34,6 +39,8 @@ public class RegistrarObra extends javax.swing.JFrame {
      RegistrarEscultura re;
      MaskFormatter mask;
      Principal control;
+     static int contador = 0;
+     File fsend;
     /**
      * Creates new form RegistrarObra
      */
@@ -231,7 +238,7 @@ public class RegistrarObra extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDesc = new javax.swing.JTextArea();
-        jTextFieldImagem = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jButtonRegistrar = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
@@ -362,7 +369,12 @@ public class RegistrarObra extends javax.swing.JFrame {
         jTextAreaDesc.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDesc);
 
-        jTextFieldImagem.setText("/var/www/imagens/");
+        jButton1.setText("Imagem");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -426,12 +438,13 @@ public class RegistrarObra extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jScrollPane1)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(0, 0, Short.MAX_VALUE))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jTextFieldPrateleira, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jTextFieldImagem))))
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(jTextFieldPrateleira, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(jButton1)))
+                                                        .addGap(0, 0, Short.MAX_VALUE))))
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -497,7 +510,7 @@ public class RegistrarObra extends javax.swing.JFrame {
                     .addComponent(jTextFieldEstante, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(jTextFieldPrateleira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -664,7 +677,8 @@ public class RegistrarObra extends javax.swing.JFrame {
                 obra = new Escultura(nome, titulo, paisOrigem, procedencia, material, dataPublicacao, dataAquisicao, localEstante, localPrateleira, localNumero, tecnica, forma, materiais, autores, peso, comprimento, largura, altura, espessura, profundidade, profundidade, comprimento);
 
             }
-            String caminhoImagem = jTextFieldImagem.getText();
+            String caminhoImagem = String.valueOf(contador)+".jpg";
+            contador++;
             String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date());
             
             obra.setCaminhoImagem(caminhoImagem);
@@ -683,6 +697,7 @@ public class RegistrarObra extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, "Erro no cadastro");
             }
+            upArquivo();
             
       
         }
@@ -748,6 +763,39 @@ public class RegistrarObra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonAdicionarMaterialActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.showOpenDialog(null);
+        
+        fsend = fc.getSelectedFile();
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void upArquivo()
+    {
+        String hostName = "200.132.85.181";
+        int portNumber = 443;
+        
+        try
+        {
+            Socket send = new Socket(hostName,portNumber);
+            FileInputStream fis = new FileInputStream(fsend);
+            DataOutputStream dos = new DataOutputStream(send.getOutputStream());
+	    byte[] buffer = new byte[4096];
+		while (fis.read(buffer) > 0) {
+			dos.write(buffer);
+		}
+		
+		fis.close();
+		dos.close();
+        }
+        catch(Exception e)
+        {
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -784,6 +832,7 @@ public class RegistrarObra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdicionarMaterial;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonRegistrar;
@@ -820,7 +869,6 @@ public class RegistrarObra extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaDesc;
     private javax.swing.JTextField jTextFieldEstante;
     private javax.swing.JTextField jTextFieldID;
-    private javax.swing.JTextField jTextFieldImagem;
     private javax.swing.JTextField jTextFieldMaterial;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNumero;
