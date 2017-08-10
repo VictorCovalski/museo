@@ -39,6 +39,15 @@ public abstract class Obra {
     private String localEstante;
     private String localPrateleira;
     private String museu;
+    private String caminhoImagem;
+
+    public String getCaminhoImagem() {
+        return caminhoImagem;
+    }
+
+    public void setCaminhoImagem(String caminhoImagem) {
+        this.caminhoImagem = caminhoImagem;
+    }
     private int localNumero;
     //private Tecnico registradoPor;
     
